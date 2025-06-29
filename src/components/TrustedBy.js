@@ -1,78 +1,79 @@
 import { motion } from 'framer-motion';
-import { useRef } from 'react';
 
-const companies = [
-  { name: 'Company 1', logo: 'https://placehold.co/200x80/2563eb/ffffff/png?text=Logo+1' },
-  { name: 'Company 2', logo: 'https://placehold.co/200x80/2563eb/ffffff/png?text=Logo+2' },
-  { name: 'Company 3', logo: 'https://placehold.co/200x80/2563eb/ffffff/png?text=Logo+3' },
-  { name: 'Company 4', logo: 'https://placehold.co/200x80/2563eb/ffffff/png?text=Logo+4' },
-  { name: 'Company 5', logo: 'https://placehold.co/200x80/2563eb/ffffff/png?text=Logo+5' },
-  { name: 'Company 6', logo: 'https://placehold.co/200x80/2563eb/ffffff/png?text=Logo+6' },
+const logos = [
+  {
+    src: "/logos/logo1.svg",
+    alt: "Company Logo 1"
+  },
+  {
+    src: "/logos/logo2.svg",
+    alt: "Company Logo 2"
+  },
+  {
+    src: "/logos/logo3.svg",
+    alt: "Company Logo 3"
+  },
+  {
+    src: "/logos/logo4.svg",
+    alt: "Company Logo 4"
+  },
+  {
+    src: "/logos/logo5.svg",
+    alt: "Company Logo 5"
+  }
 ];
 
-export default function TrustedBy() {
-  const containerRef = useRef(null);
+// Duplicate logos for seamless scrolling
+const duplicatedLogos = [...logos, ...logos];
 
+export default function TrustedBy() {
   return (
-    <section className="section py-12">
-      <div className="spacey-bg" />
-      <div className="container text-center">
-        <motion.h2
-          className="text-2xl font-semibold gradient-text"
+    <section className="py-16 relative overflow-hidden bg-black">
+      <div className="container mx-auto px-4">
+        <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
+          className="text-center text-gray-300 mb-12"
         >
-          Trusted by Industry Leaders
-        </motion.h2>
+          Over 50+ business trust us
+        </motion.p>
 
-        <motion.div
-          ref={containerRef}
-          className="mt-12 relative"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          {/* First row of logos */}
-          <div className="flex space-x-12 animate-scroll">
-            {companies.map((company, index) => (
-              <motion.div
-                key={`${company.name}-1`}
-                className="flex-shrink-0 glass-card p-6 group"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <div className="moving-gradient" />
-                <img
-                  src={company.logo}
-                  alt={company.name}
-                  className="h-12 w-auto object-contain filter brightness-100 grayscale hover:grayscale-0 transition-all duration-300"
-                />
-              </motion.div>
-            ))}
-          </div>
+        {/* Logo scroll container */}
+        <div className="relative">
+          {/* Gradient overlays */}
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10" />
 
-          {/* Second row of logos (reversed) */}
-          <div className="flex space-x-12 mt-8 animate-scroll-reverse">
-            {[...companies].reverse().map((company, index) => (
-              <motion.div
-                key={`${company.name}-2`}
-                className="flex-shrink-0 glass-card p-6 group"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <div className="moving-gradient" />
-                <img
-                  src={company.logo}
-                  alt={company.name}
-                  className="h-12 w-auto object-contain filter brightness-100 grayscale hover:grayscale-0 transition-all duration-300"
-                />
-              </motion.div>
-            ))}
+          {/* Scrolling logos */}
+          <div className="flex overflow-hidden">
+            <motion.div
+              className="flex gap-16 items-center"
+              animate={{
+                x: [0, -1920], // Adjust based on total width of logos
+              }}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            >
+              {duplicatedLogos.map((logo, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 grayscale opacity-50 hover:opacity-100 transition-opacity duration-300"
+                >
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className="h-8 w-auto"
+                  />
+                </div>
+              ))}
+            </motion.div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

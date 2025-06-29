@@ -1,185 +1,198 @@
-import { motion } from 'framer-motion';
-import { CheckIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { 
+  RocketLaunchIcon, 
+  BoltIcon, 
+  SparklesIcon,
+  CheckIcon
+} from '@heroicons/react/24/outline';
 
 const plans = [
   {
-    name: 'Starter',
-    description: 'Perfect for small businesses just getting started with AI automation.',
-    monthlyPrice: 499,
-    yearlyPrice: 449,
+    icon: RocketLaunchIcon,
+    name: "Starter",
+    price: 37,
+    description: "Perfect for small businesses starting with AI automation.",
     features: [
-      'Up to 5 automated workflows',
-      'Basic AI assistant features',
-      'Email and chat support',
-      'Weekly performance reports',
-      'Up to 3 team members',
+      "Basic workflow automation",
+      "AI-powered personal assistant",
+      "Standard analytics & reporting",
+      "Email & chat support",
+      "Up to 3 AI integrations"
     ],
-    cta: 'Get Started',
-    popular: false,
+    buttonText: "Choose this plan",
+    buttonStyle: "border border-gray-800 hover:border-gray-700 bg-gray-900 hover:bg-gray-800"
   },
   {
-    name: 'Professional',
-    description: 'Ideal for growing companies needing advanced automation capabilities.',
-    monthlyPrice: 999,
-    yearlyPrice: 899,
+    icon: BoltIcon,
+    name: "Professional",
+    price: 75,
+    description: "Perfect for small businesses starting with AI automation.",
     features: [
-      'Up to 15 automated workflows',
-      'Advanced AI assistant features',
-      'Priority support 24/7',
-      'Daily performance analytics',
-      'Up to 10 team members',
-      'Custom integrations',
-      'API access',
+      "Advanced workflow automation",
+      "AI-driven sales & marketing tools",
+      "Enhanced data analytics & insights",
+      "Priority customer support",
+      "Up to 10 AI integrations"
     ],
-    cta: 'Start Free Trial',
-    popular: true,
+    buttonText: "Choose this plan",
+    buttonStyle: "bg-[#8B5CF6] hover:bg-[#7C3AED]",
+    popular: true
   },
   {
-    name: 'Enterprise',
-    description: 'For large organizations requiring full-scale AI automation solutions.',
-    monthlyPrice: 2499,
-    yearlyPrice: 2249,
+    icon: SparklesIcon,
+    name: "Enterprise",
+    price: "Custom",
+    description: "Perfect for small businesses starting with AI automation.",
     features: [
-      'Unlimited automated workflows',
-      'Enterprise AI capabilities',
-      'Dedicated support team',
-      'Real-time analytics dashboard',
-      'Unlimited team members',
-      'Custom development',
-      'SLA guarantee',
-      'On-premise deployment option',
+      "Fully customizable AI automation",
+      "Dedicated AI business consultant",
+      "Enterprise-grade compliance",
+      "24/7 VIP support",
+      "Unlimited AI integrations"
     ],
-    cta: 'Contact Sales',
-    popular: false,
-  },
+    buttonText: "Schedule a call",
+    buttonStyle: "border border-gray-800 hover:border-gray-700 bg-gray-900 hover:bg-gray-800"
+  }
 ];
+
+const PricingCard = ({ plan, isAnnual }) => {
+  const price = typeof plan.price === 'number' 
+    ? isAnnual 
+      ? Math.floor(plan.price * 10) 
+      : plan.price
+    : plan.price;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className={`relative rounded-2xl bg-[#111111] border border-gray-800 p-8 ${
+        plan.popular ? 'bg-gradient-to-b from-[#111111] to-[#1E1435]' : ''
+      }`}
+    >
+      {plan.popular && (
+        <span className="absolute -top-3 right-8 px-3 py-1 bg-[#8B5CF6] rounded-full text-white text-sm">
+          Popular
+        </span>
+      )}
+
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-10 h-10 rounded-lg bg-gray-900 flex items-center justify-center">
+          <plan.icon className="w-5 h-5 text-gray-400" />
+        </div>
+        <h3 className="text-xl text-white font-medium">{plan.name}</h3>
+      </div>
+
+      <div className="mb-6">
+        <div className="flex items-baseline gap-1">
+          <span className="text-4xl font-bold text-white">
+            {typeof price === 'number' ? `$${price}` : price}
+          </span>
+          {typeof price === 'number' && (
+            <span className="text-gray-400">/month</span>
+          )}
+        </div>
+        <p className="text-gray-400 mt-2">{plan.description}</p>
+      </div>
+
+      <button
+        className={`w-full py-3 px-4 rounded-lg text-white transition-colors duration-200 mb-8 ${plan.buttonStyle}`}
+      >
+        {plan.buttonText}
+      </button>
+
+      <div className="space-y-6">
+        <h4 className="text-white font-medium">What's Included:</h4>
+        <ul className="space-y-4">
+          {plan.features.map((feature, index) => (
+            <motion.li
+              key={feature}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="flex items-center gap-3 text-gray-300"
+            >
+              <CheckIcon className="w-5 h-5 text-[#8B5CF6] flex-shrink-0" />
+              <span>{feature}</span>
+            </motion.li>
+          ))}
+        </ul>
+      </div>
+    </motion.div>
+  );
+};
 
 export default function Pricing() {
   const [isAnnual, setIsAnnual] = useState(false);
 
   return (
-    <section id="pricing" className="section">
-      {/* Spacey background effect */}
-      <div className="spacey-bg" />
+    <section id="pricing" className="relative py-24 overflow-hidden">
+      {/* Background with slight gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black to-gray-900/20" />
 
-      <div className="container">
-        <div className="text-center max-w-3xl mx-auto">
+      <div className="container relative z-10">
+        <div className="text-center mb-16">
+          <motion.span
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="inline-block px-4 py-1 bg-gray-900 rounded-full text-gray-300 text-sm mb-6"
+          >
+            Pricing
+          </motion.span>
+
           <motion.h2
-            className="text-3xl font-bold sm:text-4xl gradient-text"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-4xl md:text-6xl font-bold text-white mb-6"
           >
-            Simple, Transparent Pricing
+            The Best AI Automation,<br />
+            at the Right Price
           </motion.h2>
+
           <motion.p
-            className="mt-4 text-lg text-gray-300"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-xl text-gray-400 max-w-3xl mx-auto mb-12"
           >
-            Choose the perfect plan for your business needs
+            Choose a plan that fits your business needs and start automating with AI
           </motion.p>
 
-          <motion.div
-            className="mt-8 flex items-center justify-center gap-4"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <span className={`text-sm ${!isAnnual ? 'text-white' : 'text-gray-400'}`}>Monthly</span>
+          {/* Billing Toggle */}
+          <div className="flex items-center justify-center gap-4 mb-12">
+            <span className={`text-sm ${!isAnnual ? 'text-white' : 'text-gray-400'}`}>
+              Monthly
+            </span>
             <button
-              type="button"
-              className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                isAnnual ? 'bg-primary' : 'bg-gray-700'
-              }`}
-              role="switch"
-              aria-checked={isAnnual}
               onClick={() => setIsAnnual(!isAnnual)}
+              className={`relative w-16 h-8 rounded-full transition-colors duration-200 ${
+                isAnnual ? 'bg-[#8B5CF6]' : 'bg-gray-700'
+              }`}
             >
-              <span
-                aria-hidden="true"
-                className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
-                  isAnnual ? 'translate-x-5' : 'translate-x-0'
+              <div
+                className={`absolute top-1 left-1 w-6 h-6 rounded-full bg-white transition-transform duration-200 ${
+                  isAnnual ? 'translate-x-8' : 'translate-x-0'
                 }`}
               />
             </button>
             <span className={`text-sm ${isAnnual ? 'text-white' : 'text-gray-400'}`}>
-              Annual <span className="text-primary">(Save 10%)</span>
+              Annually
             </span>
-          </motion.div>
+          </div>
         </div>
 
-        <div className="mt-16 grid gap-8 lg:grid-cols-3">
-          {plans.map((plan, index) => (
-            <motion.div
-              key={plan.name}
-              className={`relative group ${plan.popular ? 'lg:-mt-8' : ''}`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              whileHover={{ scale: 1.02 }}
-            >
-              {plan.popular && (
-                <div className="absolute -top-4 left-0 right-0 mx-auto w-32 rounded-full bg-primary py-1 px-3 text-sm text-white text-center">
-                  Most Popular
-                </div>
-              )}
-
-              <div className={`h-full glass-card p-8 ${plan.popular ? 'border-2 border-primary' : ''}`}>
-                <div className="moving-gradient" />
-                <div className="relative z-10">
-                  <h3 className="text-xl font-semibold text-white">{plan.name}</h3>
-                  <p className="mt-2 text-gray-300 h-12">{plan.description}</p>
-                  <div className="mt-6">
-                    <div className="flex items-baseline gap-1">
-                      <span className="text-4xl font-bold text-white">
-                        ${isAnnual ? plan.yearlyPrice : plan.monthlyPrice}
-                      </span>
-                      <span className="text-gray-300">/mo</span>
-                    </div>
-                    {isAnnual && (
-                      <p className="mt-1 text-sm text-primary">
-                        Save ${(plan.monthlyPrice - plan.yearlyPrice) * 12}/year
-                      </p>
-                    )}
-                  </div>
-
-                  <ul className="mt-8 space-y-4">
-                    {plan.features.map((feature, featureIndex) => (
-                      <motion.li
-                        key={feature}
-                        className="flex items-start"
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.3, delay: index * 0.1 + featureIndex * 0.1 }}
-                      >
-                        <CheckIcon className="h-5 w-5 flex-shrink-0 text-primary" />
-                        <span className="ml-3 text-gray-300">{feature}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
-
-                  <motion.button
-                    className={`mt-8 w-full rounded-lg py-3 px-4 text-sm font-semibold focus:outline-none ${
-                      plan.popular
-                        ? 'bg-primary text-white hover:bg-primary/90'
-                        : 'bg-gray-800 text-white hover:bg-gray-700'
-                    }`}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    {plan.cta}
-                  </motion.button>
-                </div>
-              </div>
-            </motion.div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {plans.map((plan) => (
+            <PricingCard key={plan.name} plan={plan} isAnnual={isAnnual} />
           ))}
         </div>
       </div>

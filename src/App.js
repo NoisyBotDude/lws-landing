@@ -8,6 +8,8 @@ import Pricing from './components/Pricing';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import TrustedBy from './components/TrustedBy';
+import Testimonials from './components/Testimonials';
+import FAQ from './components/FAQ';
 
 function App() {
   return (
@@ -18,7 +20,9 @@ function App() {
       <Services />
       <Process />
       <Benefits />
+      <Testimonials />
       <Pricing />
+      <FAQ />
       <Contact />
       <Footer />
     </div>
