@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import AnimatedCard from './AnimatedCard';
 import { 
   ClockIcon, 
   CurrencyDollarIcon, 
@@ -87,13 +88,7 @@ export default function Services() {
           title="Automate repetitive tasks"
           description="We help you streamline internal operations by automating manual workflows like data entry, reporting, and approval chains saving time and cutting down errors."
         >
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="bg-[#111111] rounded-2xl p-6 border border-gray-800"
-          >
+          <AnimatedCard>
             <div className="flex items-center gap-4 mb-6">
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -148,7 +143,7 @@ export default function Services() {
                 </motion.div>
               ))}
             </div>
-          </motion.div>
+          </AnimatedCard>
         </ServiceSection>
 
         {/* AI Assistant Section */}
@@ -158,13 +153,7 @@ export default function Services() {
           description="From managing calendars to drafting emails and summarizing meetings, our AI assistants work around the clock to keep your business running smarter and faster."
           isReversed
         >
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="bg-[#111111] rounded-2xl p-6 border border-gray-800"
-          >
+          <AnimatedCard>
             <div className="relative aspect-square rounded-xl bg-gray-900/50 border border-gray-800 p-6 flex flex-col items-center justify-center text-center">
               <motion.div
                 animate={{ 
@@ -223,7 +212,7 @@ export default function Services() {
                 </span>
               </div>
             </div>
-          </motion.div>
+          </AnimatedCard>
         </ServiceSection>
 
         {/* Sales & Marketing Section */}
@@ -232,13 +221,7 @@ export default function Services() {
           title="Accelerate Sales Growth"
           description="AI tools for lead generation, personalized outreach, and automated content creation that scales your sales efforts and builds stronger brand presence."
         >
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="bg-[#111111] rounded-2xl p-6 border border-gray-800"
-          >
+          <AnimatedCard>
             <div className="space-y-4">
               <div className="flex items-center gap-3 mb-6">
                 <h3 className="text-white text-lg">E-mail Sending..</h3>
@@ -277,7 +260,7 @@ export default function Services() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </AnimatedCard>
         </ServiceSection>
 
         {/* Custom Projects Section */}
@@ -287,13 +270,7 @@ export default function Services() {
           description="Whether you're starting from scratch or enhancing an existing system, we offer strategic consulting and develop custom AI projects aligned with your unique goals."
           isReversed
         >
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="bg-[#111111] rounded-2xl p-6 border border-gray-800"
-          >
+          <AnimatedCard>
             <div className="space-y-6">
               <div className="space-y-4">
                 <h3 className="text-white text-lg">Hey David!</h3>
@@ -340,7 +317,7 @@ export default function Services() {
                 <p className="text-gray-500 text-sm text-center mt-4">No meeting today.</p>
               </div>
             </div>
-          </motion.div>
+          </AnimatedCard>
         </ServiceSection>
 
         {/* Feature tags */}

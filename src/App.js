@@ -10,22 +10,26 @@ import Footer from './components/Footer';
 import TrustedBy from './components/TrustedBy';
 import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
+import BackgroundGradient from './components/BackgroundGradient';
 
 function App() {
   return (
-    <div className="bg-black min-h-screen">
-      <Navbar />
-      <Hero />
-      <TrustedBy />
-      <Services />
-      <Process />
-      <Benefits />
-      <Testimonials />
-      <Pricing />
-      <FAQ />
-      <Contact />
-      <Footer />
-    </div>
+    <>
+      <BackgroundGradient />
+      <main className="relative min-h-screen bg-transparent">
+        <Navbar />
+        <Hero />
+        <TrustedBy />
+        <Services />
+        <Process />
+        <Benefits />
+        <Testimonials />
+        <Pricing />
+        <FAQ />
+        <Contact />
+        <Footer />
+      </main>
+    </>
   );
 }
 
