@@ -1,22 +1,25 @@
+import './App.css';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
 import Process from './components/Process';
+import Benefits from './components/Benefits';
 import Pricing from './components/Pricing';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import TrustedBy from './components/TrustedBy';
 
 function App() {
   return (
-    <div className="relative">
+    <div className="bg-black min-h-screen">
       <Navbar />
-      <main>
-        <Hero />
-        <Services />
-        <Process />
-        <Pricing />
-        <Contact />
-      </main>
+      <Hero />
+      <TrustedBy />
+      <Services />
+      <Process />
+      <Benefits />
+      <Pricing />
+      <Contact />
       <Footer />
     </div>
   );

@@ -5,152 +5,179 @@ import { useState } from 'react';
 const plans = [
   {
     name: 'Starter',
-    price: 37,
-    description: 'Perfect for small businesses starting with AI automation.',
+    description: 'Perfect for small businesses just getting started with AI automation.',
+    monthlyPrice: 499,
+    yearlyPrice: 449,
     features: [
-      'Basic workflow automation',
-      'AI-powered personal assistant',
-      'Standard analytics & reporting',
-      'Email & chat support',
-      'Up to 3 AI integrations',
+      'Up to 5 automated workflows',
+      'Basic AI assistant features',
+      'Email and chat support',
+      'Weekly performance reports',
+      'Up to 3 team members',
     ],
+    cta: 'Get Started',
+    popular: false,
   },
   {
     name: 'Professional',
-    price: 75,
-    description: 'Perfect for growing businesses needing advanced AI features.',
+    description: 'Ideal for growing companies needing advanced automation capabilities.',
+    monthlyPrice: 999,
+    yearlyPrice: 899,
     features: [
-      'Advanced workflow automation',
-      'AI-driven sales & marketing tools',
-      'Enhanced data analytics & insights',
-      'Priority customer support',
-      'Up to 10 AI integrations',
+      'Up to 15 automated workflows',
+      'Advanced AI assistant features',
+      'Priority support 24/7',
+      'Daily performance analytics',
+      'Up to 10 team members',
+      'Custom integrations',
+      'API access',
     ],
+    cta: 'Start Free Trial',
     popular: true,
   },
   {
     name: 'Enterprise',
-    price: 'Custom',
-    description: 'Perfect for large organizations requiring custom AI solutions.',
+    description: 'For large organizations requiring full-scale AI automation solutions.',
+    monthlyPrice: 2499,
+    yearlyPrice: 2249,
     features: [
-      'Fully customizable AI automation',
-      'Dedicated AI business consultant',
-      'Enterprise-grade compliance',
-      '24/7 VIP support',
-      'Unlimited AI integrations',
+      'Unlimited automated workflows',
+      'Enterprise AI capabilities',
+      'Dedicated support team',
+      'Real-time analytics dashboard',
+      'Unlimited team members',
+      'Custom development',
+      'SLA guarantee',
+      'On-premise deployment option',
     ],
+    cta: 'Contact Sales',
+    popular: false,
   },
 ];
 
 export default function Pricing() {
-  const [annual, setAnnual] = useState(false);
+  const [isAnnual, setIsAnnual] = useState(false);
 
   return (
-    <section id="pricing" className="section bg-gray-50">
+    <section id="pricing" className="section">
+      {/* Spacey background effect */}
+      <div className="spacey-bg" />
+
       <div className="container">
         <div className="text-center max-w-3xl mx-auto">
           <motion.h2
-            className="text-3xl font-bold sm:text-4xl"
+            className="text-3xl font-bold sm:text-4xl gradient-text"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            The Best AI Automation, at the Right Price
+            Simple, Transparent Pricing
           </motion.h2>
           <motion.p
-            className="mt-4 text-lg text-gray-600"
+            className="mt-4 text-lg text-gray-300"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            Choose a plan that fits your business needs and start automating with AI
+            Choose the perfect plan for your business needs
           </motion.p>
 
           <motion.div
-            className="mt-8 inline-flex items-center rounded-full border p-1 bg-white"
+            className="mt-8 flex items-center justify-center gap-4"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
           >
+            <span className={`text-sm ${!isAnnual ? 'text-white' : 'text-gray-400'}`}>Monthly</span>
             <button
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                !annual ? 'bg-primary text-white' : 'text-gray-700'
+              type="button"
+              className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
+                isAnnual ? 'bg-primary' : 'bg-gray-700'
               }`}
-              onClick={() => setAnnual(false)}
+              role="switch"
+              aria-checked={isAnnual}
+              onClick={() => setIsAnnual(!isAnnual)}
             >
-              Monthly
+              <span
+                aria-hidden="true"
+                className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                  isAnnual ? 'translate-x-5' : 'translate-x-0'
+                }`}
+              />
             </button>
-            <button
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                annual ? 'bg-primary text-white' : 'text-gray-700'
-              }`}
-              onClick={() => setAnnual(true)}
-            >
-              Annually
-            </button>
+            <span className={`text-sm ${isAnnual ? 'text-white' : 'text-gray-400'}`}>
+              Annual <span className="text-primary">(Save 10%)</span>
+            </span>
           </motion.div>
         </div>
 
-        <div className="mt-16 grid gap-8 md:grid-cols-3">
+        <div className="mt-16 grid gap-8 lg:grid-cols-3">
           {plans.map((plan, index) => (
             <motion.div
               key={plan.name}
-              className={`relative bg-white rounded-2xl p-8 shadow-sm ${
-                plan.popular ? 'ring-2 ring-primary' : ''
-              }`}
+              className={`relative group ${plan.popular ? 'lg:-mt-8' : ''}`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
+              whileHover={{ scale: 1.02 }}
             >
               {plan.popular && (
-                <span className="absolute top-0 -translate-y-1/2 bg-primary text-white px-3 py-0.5 text-sm font-medium rounded-full">
-                  Popular
-                </span>
-              )}
-              <div>
-                <h3 className="text-lg font-semibold">{plan.name}</h3>
-                <div className="mt-4 flex items-baseline">
-                  {typeof plan.price === 'number' ? (
-                    <>
-                      <span className="text-4xl font-bold">${annual ? plan.price * 10 : plan.price}</span>
-                      <span className="ml-1 text-gray-600">/month</span>
-                    </>
-                  ) : (
-                    <span className="text-4xl font-bold">{plan.price}</span>
-                  )}
+                <div className="absolute -top-4 left-0 right-0 mx-auto w-32 rounded-full bg-primary py-1 px-3 text-sm text-white text-center">
+                  Most Popular
                 </div>
-                <p className="mt-4 text-gray-600">{plan.description}</p>
-              </div>
+              )}
 
-              <ul className="mt-8 space-y-4">
-                {plan.features.map((feature) => (
-                  <motion.li
-                    key={feature}
-                    className="flex items-center"
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3 }}
+              <div className={`h-full glass-card p-8 ${plan.popular ? 'border-2 border-primary' : ''}`}>
+                <div className="moving-gradient" />
+                <div className="relative z-10">
+                  <h3 className="text-xl font-semibold text-white">{plan.name}</h3>
+                  <p className="mt-2 text-gray-300 h-12">{plan.description}</p>
+                  <div className="mt-6">
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-4xl font-bold text-white">
+                        ${isAnnual ? plan.yearlyPrice : plan.monthlyPrice}
+                      </span>
+                      <span className="text-gray-300">/mo</span>
+                    </div>
+                    {isAnnual && (
+                      <p className="mt-1 text-sm text-primary">
+                        Save ${(plan.monthlyPrice - plan.yearlyPrice) * 12}/year
+                      </p>
+                    )}
+                  </div>
+
+                  <ul className="mt-8 space-y-4">
+                    {plan.features.map((feature, featureIndex) => (
+                      <motion.li
+                        key={feature}
+                        className="flex items-start"
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.3, delay: index * 0.1 + featureIndex * 0.1 }}
+                      >
+                        <CheckIcon className="h-5 w-5 flex-shrink-0 text-primary" />
+                        <span className="ml-3 text-gray-300">{feature}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+
+                  <motion.button
+                    className={`mt-8 w-full rounded-lg py-3 px-4 text-sm font-semibold focus:outline-none ${
+                      plan.popular
+                        ? 'bg-primary text-white hover:bg-primary/90'
+                        : 'bg-gray-800 text-white hover:bg-gray-700'
+                    }`}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <CheckIcon className="h-5 w-5 text-primary" />
-                    <span className="ml-3 text-gray-600">{feature}</span>
-                  </motion.li>
-                ))}
-              </ul>
-
-              <div className="mt-8">
-                <a
-                  href={plan.price === 'Custom' ? '#contact' : '#'}
-                  className={`block w-full text-center btn ${
-                    plan.popular ? 'btn-primary' : 'btn-outline'
-                  }`}
-                >
-                  {plan.price === 'Custom' ? 'Schedule a call' : 'Choose this plan'}
-                </a>
+                    {plan.cta}
+                  </motion.button>
+                </div>
               </div>
             </motion.div>
           ))}

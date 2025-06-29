@@ -6,24 +6,132 @@
 
 @layer base {
   body {
-    @apply font-sans antialiased text-gray-900 bg-white;
+    @apply font-sans antialiased bg-black text-white;
   }
 }
 
 @layer components {
   .btn {
-    @apply px-6 py-2 font-medium transition-all duration-200 rounded-lg;
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-200;
   }
   .btn-primary {
-    @apply text-white bg-primary hover:bg-secondary;
+    @apply bg-[#8B5CF6] text-white hover:bg-[#7C3AED];
   }
   .btn-outline {
-    @apply text-primary border-2 border-primary hover:bg-primary hover:text-white;
+    @apply border border-gray-700 text-white hover:bg-gray-800;
   }
   .section {
-    @apply py-20;
+    @apply py-24 relative;
   }
   .container {
-    @apply px-4 mx-auto max-w-7xl sm:px-6 lg:px-8;
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10;
+  }
+  .glass-card {
+    @apply relative overflow-hidden rounded-2xl;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300;
+  }
+  .moving-gradient {
+    @apply absolute inset-0 opacity-20;
+    background: linear-gradient(
+      45deg,
+      rgba(139, 92, 246, 0.3),
+      rgba(124, 58, 237, 0.1),
+      rgba(139, 92, 246, 0.3)
+    );
+    background-size: 200% 200%;
+    animation: moveGradient 5s ease infinite;
+  }
+  .spacey-bg {
+    @apply absolute inset-0 opacity-20 ;
+    background-image: 
+      radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.05) 0%, transparent 40%);
+    animation: pulse 8s ease-in-out infinite alternate;
+  }
+}
+
+/* Stars animation */
+.stars-container {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #000000;
+  z-index: -1;
+}
+
+@function random-stars($n) {
+  $value: '#{random(2000)}px #{random(2000)}px #FFF';
+  @for $i from 2 through $n {
+    $value: '#{$value} , #{random(2000)}px #{random(2000)}px #FFF';
+  }
+  @return unquote($value);
+}
+
+#stars {
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: 1804px 1265px #FFF , 365px 332px #FFF , 86px 1888px #FFF , 1888px 484px #FFF , 199px 1489px #FFF , 1459px 1010px #FFF , 807px 388px #FFF , 855px 558px #FFF , 83px 1095px #FFF , 1418px 377px #FFF , 677px 886px #FFF , 862px 1709px #FFF , 1058px 1085px #FFF , 50px 1772px #FFF , 1941px 1544px #FFF , 377px 900px #FFF , 184px 712px #FFF , 1797px 1928px #FFF , 507px 1861px #FFF , 1849px 19px #FFF , 1399px 200px #FFF , 972px 497px #FFF , 795px 1109px #FFF , 746px 970px #FFF , 1524px 972px #FFF , 1631px 389px #FFF , 1026px 1016px #FFF , 1295px 862px #FFF , 1258px 1876px #FFF , 791px 189px #FFF , 1519px 45px #FFF , 592px 1405px #FFF , 620px 130px #FFF , 1044px 1171px #FFF , 1162px 1621px #FFF , 1778px 1513px #FFF , 808px 1293px #FFF , 1246px 1391px #FFF , 1570px 1785px #FFF , 1956px 1759px #FFF , 1132px 1612px #FFF , 1314px 1416px #FFF , 1285px 1562px #FFF , 1820px 149px #FFF , 1129px 849px #FFF , 1574px 1393px #FFF , 1500px 1905px #FFF , 782px 1032px #FFF , 1529px 7px #FFF , 1825px 1668px #FFF , 1160px 1684px #FFF , 1966px 1602px #FFF , 1853px 1952px #FFF , 1438px 1566px #FFF , 1999px 1971px #FFF , 1667px 1267px #FFF , 1851px 1448px #FFF , 1558px 1928px #FFF , 1627px 1473px #FFF;
+  animation: twinkle 3s ease-in-out infinite alternate;
+}
+
+#stars2 {
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: 1804px 1265px #FFF , 365px 332px #FFF , 86px 1888px #FFF , 1888px 484px #FFF , 199px 1489px #FFF , 1459px 1010px #FFF , 807px 388px #FFF , 855px 558px #FFF , 83px 1095px #FFF , 1418px 377px #FFF , 677px 886px #FFF , 862px 1709px #FFF , 1058px 1085px #FFF;
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+
+#stars3 {
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  box-shadow: 1804px 1265px #FFF , 365px 332px #FFF , 86px 1888px #FFF , 1888px 484px #FFF , 199px 1489px #FFF;
+  animation: twinkle 5s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes moveGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
   }
 }
