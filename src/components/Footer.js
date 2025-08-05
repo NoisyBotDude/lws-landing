@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-
+import logo from '../logos/2@4x.png'
 const navigation = {
   links: [
     { name: 'Services', href: '#services' },
@@ -38,13 +38,13 @@ export default function Footer() {
             >
               {/* Logo */}
               <div className="flex items-center mb-6">
-                <img src="/logo.svg" alt="Xtract" className="h-8 w-auto" />
-                <span className="ml-2 text-2xl font-bold text-white">BWS</span>
+                <img src={logo} alt="Xtract" className="h-12 w-auto" />
+                {/* <span className="ml-2 text-2xl font-bold text-white">BWS</span> */}
               </div>
 
               {/* Company Description */}
               <p className="text-gray-400 mb-8">
-                Xtract – Automate Smarter, Optimize Faster, and Grow Stronger.
+                Build With Stack – Automate Smarter, Optimize Faster, and Grow Stronger.
               </p>
 
               {/* Newsletter */}
