@@ -40,12 +40,12 @@ export default function Navbar() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <a href="#" className="flex items-center">
-              <img
-                src="/logo.svg"
-                alt="Xtract"
-                className="h-8 w-auto"
-              />
-              <span className="ml-2 text-2xl font-bold text-white">XTRACT</span>
+              // <img
+              //   src="/logo.svg"
+              //   alt="Xtract"
+              //   className="h-8 w-auto"
+              // />
+              <span className="ml-2 text-2xl font-bold text-white">BWS</span>
             </a>
           </motion.div>
 
