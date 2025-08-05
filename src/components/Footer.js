@@ -39,7 +39,7 @@ export default function Footer() {
               {/* Logo */}
               <div className="flex items-center mb-6">
                 <img src="/logo.svg" alt="Xtract" className="h-8 w-auto" />
-                <span className="ml-2 text-2xl font-bold text-white">XTRACT</span>
+                <span className="ml-2 text-2xl font-bold text-white">BWS</span>
               </div>
 
               {/* Company Description */}
