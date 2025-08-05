@@ -84,9 +84,9 @@ export default function Services() {
       <div className="container relative z-10">
         {/* Workflow Automation Section */}
         <ServiceSection
-          tag="Workflow Automation"
-          title="Automate repetitive tasks"
-          description="We help you streamline internal operations by automating manual workflows like data entry, reporting, and approval chains saving time and cutting down errors."
+          tag="Custom Software Development"
+          title="Build Products That Scale"
+          description="From complex CRMs to internal tools, customer portals, or admin dashboards we build products tailored to how you work. No cookie-cutter code. Just scalable software that grows with you."
         >
           <AnimatedCard>
             <div className="flex items-center gap-4 mb-6">
@@ -148,9 +148,9 @@ export default function Services() {
 
         {/* AI Assistant Section */}
         <ServiceSection
-          tag="AI Assistant"
-          title="Delegate Daily Tasks"
-          description="From managing calendars to drafting emails and summarizing meetings, our AI assistants work around the clock to keep your business running smarter and faster."
+          tag="AI Integration & Automation"
+          title="Save Time. Close Faster."
+          description="We inject AI into your systems - think automated outreach, smart scheduling, lead scoring, data extraction, and more. Save time, close faster, and delight customers."
           isReversed
         >
           <AnimatedCard>
@@ -217,9 +217,9 @@ export default function Services() {
 
         {/* Sales & Marketing Section */}
         <ServiceSection
-          tag="Sales & Marketing"
-          title="Accelerate Sales Growth"
-          description="AI tools for lead generation, personalized outreach, and automated content creation that scales your sales efforts and builds stronger brand presence."
+          tag="Workflow Optimization"
+          title="Streamline Your Operations"
+          description="We rebuild your operations from the ground up using tools like Make.com, Zapier, Retool, or fully custom backends. No more duplicate work or missed handoffs."
         >
           <AnimatedCard>
             <div className="space-y-4">
@@ -265,9 +265,9 @@ export default function Services() {
 
         {/* Custom Projects Section */}
         <ServiceSection
-          tag="Custom Projects"
-          title="Build Smarter Systems"
-          description="Whether you're starting from scratch or enhancing an existing system, we offer strategic consulting and develop custom AI projects aligned with your unique goals."
+          tag="Fractional Tech Leadership"
+          title="Your On-Demand CTO"
+          description="Need a CTO brain without the full-time cost? We'll help architect your product, hire the right engineers, and ship fast. One point of contact, weekly updates, no communication black hole."
           isReversed
         >
           <AnimatedCard>
@@ -322,7 +322,14 @@ export default function Services() {
 
         {/* Feature tags */}
         <div className="flex flex-wrap justify-center gap-4 pb-24">
-          {['Strategy', 'Custom AI', 'Consulting', 'Summaries', 'Scheduling', 'Many more'].map((feature, index) => (
+          {[
+            'Global Dev Talent',
+            'US Standards',
+            'Built-In PM + Dev Team',
+            'Speed Without Sacrifice',
+            'Code Reviews',
+            'Clean Handoffs'
+          ].map((feature, index) => (
             <motion.div
               key={feature}
               initial={{ opacity: 0, y: 20 }}

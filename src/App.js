@@ -11,6 +11,7 @@ import TrustedBy from './components/TrustedBy';
 import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
 import BackgroundGradient from './components/BackgroundGradient';
+import About from './components/About';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Hero />
         <TrustedBy />
         <Services />
+        <About />
         <Process />
         <Benefits />
         <Testimonials />

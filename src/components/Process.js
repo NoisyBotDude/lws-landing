@@ -118,7 +118,7 @@ export default function Process() {
             transition={{ duration: 0.5 }}
             className="inline-block px-4 py-1 bg-gray-900 rounded-full text-gray-300 text-sm mb-6"
           >
-            Our Process
+            CTO-as-a-Service
           </motion.span>
 
           <motion.h2
@@ -128,7 +128,7 @@ export default function Process() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl md:text-6xl font-bold text-white mb-6"
           >
-            Our Simple, Smart,<br />and Scalable Process
+            Tech Leadership<br />When You Need It
           </motion.h2>
 
           <motion.p
@@ -138,16 +138,16 @@ export default function Process() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-gray-400 max-w-3xl mx-auto"
           >
-            We design, develop, and implement automation tools that help you work smarter, not harder
+            No tech team? No problem. We help you plan, hire, build, and ship.
           </motion.p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {/* Step 1: Smart Analyzing */}
+          {/* Step 1: Architecture & Planning */}
           <ProcessStep
             step="1"
-            title="Smart Analyzing"
-            description="We assess your needs and identify AI solutions to streamline workflows and improve efficiency."
+            title="Architecture & Planning"
+            description="We help with architecture & roadmap planning, ensuring your tech aligns with business goals."
           >
             <div className="grid grid-cols-2 gap-4">
               <div className="aspect-square bg-gray-900/50 rounded-xl border border-gray-800 p-6 flex items-center justify-center">
@@ -185,11 +185,11 @@ export default function Process() {
             </div>
           </ProcessStep>
 
-          {/* Step 2: AI Development */}
+          {/* Step 2: Team Building */}
           <ProcessStep
             step="2"
-            title="AI Development"
-            description="Our team builds intelligent automation systems tailored to your business processes."
+            title="Team Building"
+            description="We assist in hiring and managing developers, building the right team for your needs."
           >
             <div className="bg-gray-900/50 rounded-xl border border-gray-800 p-4">
               <div className="flex items-center justify-between mb-4 px-2">
@@ -213,11 +213,11 @@ export default function Process() {
             </div>
           </ProcessStep>
 
-          {/* Step 3: Seamless Integration */}
+          {/* Step 3: Product Development */}
           <ProcessStep
             step="3"
-            title="Seamless Integration"
-            description="We smoothly integrate AI solutions into your existing infrastructure with minimal disruption."
+            title="Product Development"
+            description="Weekly reviews, product decisions, and comprehensive documentation to keep your project on track."
           >
             <div className="bg-gray-900/50 rounded-xl border border-gray-800 p-8">
               <div className="flex items-center justify-between gap-8">
@@ -259,11 +259,11 @@ export default function Process() {
             </div>
           </ProcessStep>
 
-          {/* Step 4: Continuous Optimization */}
+          {/* Step 4: System Handover */}
           <ProcessStep
             step="4"
-            title="Continuous Optimization"
-            description="We refine performance, analyze insights, and enhance automation for long-term growth."
+            title="System Handover"
+            description="We ensure your systems are handover-ready when you're prepared to scale with your own team."
           >
             <div className="space-y-3">
               <motion.div
@@ -315,7 +315,7 @@ export default function Process() {
               transition={{ duration: 0.5 }}
               className="inline-block px-4 py-1 bg-gray-900 rounded-full text-gray-300 text-sm mb-6"
             >
-              Case Studies
+              Our Toolkits
             </motion.span>
 
             <motion.h2
@@ -325,7 +325,7 @@ export default function Process() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-4xl md:text-6xl font-bold text-white mb-6"
             >
-              See How Smart AI Automation<br />Transforms Businesses
+              Tools & APIs<br />We Work With
             </motion.h2>
 
             <motion.p
@@ -335,30 +335,50 @@ export default function Process() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-xl text-gray-400 max-w-3xl mx-auto"
             >
-              See how AI automation streamlines operations, boosts and drives growth.
+              We're tech-agnostic and tool-native. We use whatever it takes to get the job done.
             </motion.p>
           </div>
 
-          {/* Case Study */}
-          <CaseStudy
-            logo={
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                  <div className="w-4 h-4 bg-black rounded-full" />
-                </div>
-                <span className="text-white text-xl font-medium">Logoipsum</span>
-              </div>
-            }
-            title="AI-driven forecasting cut inventory waste by 40% for TrailForge"
-            description="TrailForge, a suitcase brand, faced stock issues and inefficiencies. Our AI forecasting optimized inventory and production cycles, helping them save costs and deliver faster."
-            impacts={[
-              "40% Less Inventory Waste",
-              "35% Faster Production",
-              "20% More Accurate Forecasting",
-              "25% Faster Fulfillment"
-            ]}
-            image="/suitcase-dark.jpg"
-          />
+          {/* Case Study - Replace with Toolkit Categories */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                title: "Automation",
+                items: ["Make.com", "Zapier", "Google Apps Script"]
+              },
+              {
+                title: "AI & ML",
+                items: ["OpenAI", "Claude", "LangChain", "GPT Agents"]
+              },
+              {
+                title: "CRM & Tools",
+                items: ["GoHighLevel", "HubSpot", "Monday.com"]
+              },
+              {
+                title: "Infrastructure",
+                items: ["Vercel", "Firebase", "DigitalOcean"]
+              }
+            ].map((category, index) => (
+              <motion.div
+                key={category.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="p-6 bg-gray-900/50 rounded-xl border border-gray-800"
+              >
+                <h3 className="text-xl font-semibold text-white mb-4">{category.title}</h3>
+                <ul className="space-y-2">
+                  {category.items.map((item, i) => (
+                    <li key={item} className="text-gray-400 flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-[#8B5CF6] rounded-full" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
 
           {/* Drag to Explore */}
           <div className="flex items-center justify-center gap-4 mt-12 text-gray-400">

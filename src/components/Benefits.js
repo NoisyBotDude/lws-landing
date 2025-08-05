@@ -1,43 +1,43 @@
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
 import {
-  BoltIcon,
   UserGroupIcon,
   ClockIcon,
-  CurrencyDollarIcon,
-  ChartBarSquareIcon,
-  ArrowTrendingUpIcon
+  ChatBubbleLeftRightIcon,
+  CodeBracketIcon,
+  GlobeAltIcon,
+  ShieldCheckIcon
 } from '@heroicons/react/24/outline';
 
 const benefits = [
   {
-    icon: BoltIcon,
-    title: "Increased Productivity",
-    description: "Gain actionable insights with AI-driven analytics to improve decision-making and strategy."
+    icon: UserGroupIcon,
+    title: "Fractional Tech Leadership",
+    description: "Need a CTO brain without the full-time cost? We'll help architect your product, hire the right engineers, and ship fast."
   },
   {
-    icon: UserGroupIcon,
-    title: "Better Customer Experience",
-    description: "Personalized AI interactions improve response times, customer engagement, and overall satisfaction."
+    icon: ChatBubbleLeftRightIcon,
+    title: "Built-In PM + Dev Team",
+    description: "One point of contact. Weekly updates. No communication black hole. We keep you informed and involved every step of the way."
+  },
+  {
+    icon: GlobeAltIcon,
+    title: "Global Dev Talent",
+    description: "Access to top-tier developers worldwide while maintaining US standards. Code reviews, clean handoffs, and scalable systems baked in."
   },
   {
     icon: ClockIcon,
-    title: "24/7 Availability",
-    description: "AI-powered systems operate around the clock, ensuring seamless support and execution without downtime."
+    title: "Speed Without Sacrifice",
+    description: "We ship MVPs in weeks, not quarters, without compromising on quality or scalability."
   },
   {
-    icon: CurrencyDollarIcon,
-    title: "Cost Reduction",
-    description: "AI automation minimizes manual work, cuts operational costs, and optimizes resource allocation for better profitability."
+    icon: CodeBracketIcon,
+    title: "Code Reviews & Clean Handoffs",
+    description: "Every line of code is reviewed, documented, and built for long-term maintainability."
   },
   {
-    icon: ChartBarSquareIcon,
-    title: "Data-Driven Insights",
-    description: "Leverage AI to analyze vast data sets, identify trends, and make smarter, faster, and more accurate business decisions."
-  },
-  {
-    icon: ArrowTrendingUpIcon,
-    title: "Scalability & Growth",
-    description: "AI adapts to your business needs, allowing you to scale efficiently without increasing workload or costs."
+    icon: ShieldCheckIcon,
+    title: "US Standards & Best Practices",
+    description: "We follow industry best practices for security, scalability, and code quality while maintaining clear communication."
   }
 ];
 
@@ -125,7 +125,7 @@ export default function Benefits() {
             transition={{ duration: 0.5 }}
             className="inline-block px-4 py-1 bg-gray-900 rounded-full text-gray-300 text-sm mb-6"
           >
-            Benefits
+            Why Choose Us
           </motion.span>
 
           <motion.h2
@@ -135,8 +135,8 @@ export default function Benefits() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl md:text-6xl font-bold text-white mb-6"
           >
-            The Key Benefits of AI<br />
-            for Your Business Growth
+            Why Choose<br />
+            Learn With Stack
           </motion.h2>
 
           <motion.p
@@ -146,8 +146,7 @@ export default function Benefits() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-gray-400 max-w-3xl mx-auto"
           >
-            Discover how AI automation enhances efficiency, reduces costs, and drives
-            business growth with smarter, faster processes.
+            We combine global talent with US standards to deliver fast, high-quality solutions that help you scale.
           </motion.p>
         </div>
 

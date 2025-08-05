@@ -1,0 +1,2176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Platform Documentation</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border-radius: 4px;
+            background-color: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+        }
+        .endpoint {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .method {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .get { background-color: #61affe; }
+        .post { background-color: #49cc90; }
+        .put { background-color: #fca130; }
+        .delete { background-color: #f93e3e; }
+        pre {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Learning Platform Documentation</h1>
+        
+        <div class="section">
+            <h1>Technical Stack Overview</h1>
+
+            <h2>Frontend Technologies</h2>
+            <table>
+                <tr>
+                    <th>Technology</th>
+                    <th>Version</th>
+                    <th>Description</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>Next.js (App Router)</td>
+                    <td>14.x</td>
+                    <td>React framework with built-in features for production</td>
+                    <td>
+                        <ul>
+                            <li>Server-side rendering (SSR) for better SEO</li>
+                            <li>App router for enhanced routing capabilities</li>
+                            <li>API routes for backend functionality</li>
+                            <li>Optimized performance with automatic code splitting</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>TypeScript</td>
+                    <td>5.x</td>
+                    <td>Typed superset of JavaScript</td>
+                    <td>
+                        <ul>
+                            <li>Type safety and better developer experience</li>
+                            <li>Enhanced IDE support and code completion</li>
+                            <li>Reduced runtime errors</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tailwind CSS</td>
+                    <td>3.x</td>
+                    <td>Utility-first CSS framework</td>
+                    <td>
+                        <ul>
+                            <li>Rapid UI development with utility classes</li>
+                            <li>Built-in responsive design system</li>
+                            <li>Custom design system integration</li>
+                            <li>Optimized production builds</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>shadcn/ui</td>
+                    <td>Latest</td>
+                    <td>Re-usable component library</td>
+                    <td>
+                        <ul>
+                            <li>Accessible components built with Radix UI</li>
+                            <li>Customizable with Tailwind CSS</li>
+                            <li>Copy-paste component architecture</li>
+                            <li>Dark mode support</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Auth0</td>
+                    <td>Latest</td>
+                    <td>Authentication and authorization platform</td>
+                    <td>
+                        <ul>
+                            <li>Secure user authentication</li>
+                            <li>Social login integration</li>
+                            <li>JWT token management</li>
+                            <li>Role-based access control</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>GraphQL</td>
+                    <td>16.x</td>
+                    <td>Query language for APIs</td>
+                    <td>
+                        <ul>
+                            <li>Efficient data fetching</li>
+                            <li>Type-safe API queries</li>
+                            <li>Real-time updates with subscriptions</li>
+                            <li>Reduced over-fetching</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Redis</td>
+                    <td>Latest</td>
+                    <td>In-memory data structure store</td>
+                    <td>
+                        <ul>
+                            <li>Session management</li>
+                            <li>Caching layer for improved performance</li>
+                            <li>Real-time data handling</li>
+                            <li>Rate limiting</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+
+            <h2>Backend Technologies</h2>
+            <table>
+                <tr>
+                    <th>Technology</th>
+                    <th>Version</th>
+                    <th>Description</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>Node.js</td>
+                    <td>20.x LTS</td>
+                    <td>JavaScript runtime environment</td>
+                    <td>
+                        <ul>
+                            <li>Server-side JavaScript execution</li>
+                            <li>High-performance event-driven architecture</li>
+                            <li>Large ecosystem of packages</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Express.js</td>
+                    <td>4.x</td>
+                    <td>Web application framework</td>
+                    <td>
+                        <ul>
+                            <li>RESTful API development</li>
+                            <li>Middleware support</li>
+                            <li>Route handling</li>
+                            <li>Error management</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>TypeScript</td>
+                    <td>5.x</td>
+                    <td>Typed JavaScript</td>
+                    <td>
+                        <ul>
+                            <li>Type safety for backend code</li>
+                            <li>Improved maintainability</li>
+                            <li>Better error detection</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>MongoDB</td>
+                    <td>7.x</td>
+                    <td>NoSQL database</td>
+                    <td>
+                        <ul>
+                            <li>Flexible document-based storage</li>
+                            <li>Horizontal scaling</li>
+                            <li>Rich querying capabilities</li>
+                            <li>Schema-less design</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>GraphQL</td>
+                    <td>16.x</td>
+                    <td>API query language</td>
+                    <td>
+                        <ul>
+                            <li>Single endpoint for all API requests</li>
+                            <li>Type system for data modeling</li>
+                            <li>Efficient data resolution</li>
+                            <li>Built-in documentation</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+
+            <h2>Development Tools & Practices</h2>
+            <ul>
+                <li>Git for version control</li>
+                <li>ESLint & Prettier for code formatting</li>
+                <li>Jest & React Testing Library for testing</li>
+                <li>Docker for containerization</li>
+                <li>CI/CD pipeline with GitHub Actions</li>
+                <li>Swagger/OpenAPI for REST API documentation</li>
+                <li>GraphQL Playground for API testing</li>
+            </ul>
+
+            <h2>Architecture Overview</h2>
+            <pre>
+Client Side (Next.js App)
+├── Pages (App Router)
+│   ├── Server Components (Default)
+│   └── Client Components (with 'use client')
+├── API Routes
+│   ├── GraphQL Endpoint
+│   └── Auth0 Callbacks
+└── State Management
+    ├── Server State (GraphQL)
+    └── Client State (React Hooks)
+
+Backend (Node.js + Express)
+├── GraphQL API
+│   ├── Type Definitions
+│   ├── Resolvers
+│   └── Directives
+├── Database Layer
+│   ├── MongoDB Models
+│   └── Repositories
+├── Services
+│   ├── Authentication (Auth0)
+│   ├── Caching (Redis)
+│   └── Business Logic
+└── Infrastructure
+    ├── Error Handling
+    ├── Logging
+    └── Monitoring
+</pre>
+        </div>
+
+        <div class="section">
+            <h2>Page Structure Overview</h2>
+            <p>The platform consists of the following main pages:</p>
+            <ul>
+                <li>Dashboard</li>
+                <li>Profile</li>
+                <li>Courses</li>
+                <li>Search</li>
+                <li>Analytics</li>
+                <li>Discussions</li>
+                <li>Support</li>
+                <li>Reports</li>
+                <li>Settings</li>
+                <li>Notifications</li>
+                <li>AI Assistant</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Dashboard Page</h2>
+            <h3>Logic</h3>
+            <ul>
+                <li>Display user's learning progress and statistics</li>
+                <li>Show total watch hours</li>
+                <li>Display total material reads</li>
+                <li>Track growth rate</li>
+                <li>Show recent activities</li>
+                <li>Display recommended courses</li>
+                <li>Show visualizations of learning patterns</li>
+            </ul>
+
+            <h3>Component Structure</h3>
+            <pre>
+&lt;DashboardLayout&gt;
+    &lt;StatisticsSection&gt;
+        &lt;WatchHoursCard /&gt;
+        &lt;MaterialReadsCard /&gt;
+        &lt;GrowthRateCard /&gt;
+    &lt;/StatisticsSection&gt;
+    
+    &lt;RecentActivitiesSection&gt;
+        &lt;ActivityList /&gt;
+    &lt;/RecentActivitiesSection&gt;
+    
+    &lt;RecommendedCoursesSection&gt;
+        &lt;CourseGrid /&gt;
+    &lt;/RecommendedCoursesSection&gt;
+    
+    &lt;VisualizationsSection&gt;
+        &lt;LearningChart /&gt;
+        &lt;ProgressGraph /&gt;
+    &lt;/VisualizationsSection&gt;
+&lt;/DashboardLayout&gt;
+</pre>
+
+            <h3>GraphQL Schema</h3>
+            <pre>
+type DashboardStats {
+    totalWatchHours: Float!
+    totalMaterialReads: Int!
+    growthRate: Float!
+    recentActivities: [Activity!]!
+    recommendedCourses: [Course!]!
+}
+
+type Activity {
+    id: ID!
+    type: ActivityType!
+    timestamp: DateTime!
+    description: String!
+    courseId: ID
+    materialId: ID
+}
+
+enum ActivityType {
+    COURSE_STARTED
+    COURSE_COMPLETED
+    MATERIAL_READ
+    QUIZ_COMPLETED
+}
+
+type Query {
+    getDashboardStats: DashboardStats!
+    getRecentActivities(limit: Int!): [Activity!]!
+    getRecommendedCourses(limit: Int!): [Course!]!
+}
+</pre>
+        </div>
+
+        <div class="section">
+            <h2>API Endpoints</h2>
+            
+            <div class="endpoint">
+                <span class="method post">QUERY</span>
+                <code>getDashboardStats</code>
+                <p>Fetches all dashboard statistics for the current user</p>
+                <h4>Response</h4>
+                <pre>
+{
+    "data": {
+        "getDashboardStats": {
+            "totalWatchHours": 45.5,
+            "totalMaterialReads": 23,
+            "growthRate": 15.7,
+            "recentActivities": [...],
+            "recommendedCourses": [...]
+        }
+    }
+}
+</pre>
+            </div>
+
+            <div class="endpoint">
+                <span class="method post">QUERY</span>
+                <code>getRecentActivities</code>
+                <p>Fetches recent user activities</p>
+                <h4>Variables</h4>
+                <pre>
+{
+    "limit": 10
+}
+</pre>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Frontend Implementation</h2>
+            <h3>Required Packages</h3>
+            <pre>
+npm install @apollo/client graphql @emotion/styled @mui/material chart.js react-chartjs-2
+</pre>
+
+            <h3>Apollo Client Setup</h3>
+            <pre>
+// lib/apollo-client.ts
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+
+export const client = new ApolloClient({
+    uri: 'http://your-backend-url/graphql',
+    cache: new InMemoryCache(),
+    credentials: 'include'
+});
+</pre>
+
+            <h3>Example Dashboard Query</h3>
+            <pre>
+// queries/dashboard.ts
+import { gql } from '@apollo/client';
+
+export const GET_DASHBOARD_STATS = gql`
+    query GetDashboardStats {
+        getDashboardStats {
+            totalWatchHours
+            totalMaterialReads
+            growthRate
+            recentActivities {
+                id
+                type
+                timestamp
+                description
+            }
+            recommendedCourses {
+                id
+                title
+                thumbnail
+                duration
+            }
+        }
+    }
+`;
+</pre>
+        </div>
+
+        <div class="section">
+            <h2>Backend Implementation</h2>
+            <h3>GraphQL Resolver</h3>
+            <pre>
+// resolvers/dashboard.ts
+export const dashboardResolvers = {
+    Query: {
+        getDashboardStats: async (_, __, { user }) => {
+            if (!user) throw new AuthenticationError('Not authenticated');
+            
+            const stats = await DashboardService.getUserStats(user.id);
+            const activities = await ActivityService.getRecent(user.id);
+            const recommendations = await CourseService.getRecommendations(user.id);
+            
+            return {
+                ...stats,
+                recentActivities: activities,
+                recommendedCourses: recommendations
+            };
+        }
+    }
+};
+</pre>
+        </div>
+
+        <div class="section">
+            <h2>Error Handling</h2>
+            <table>
+                <tr>
+                    <th>Error Code</th>
+                    <th>Description</th>
+                    <th>Resolution</th>
+                </tr>
+                <tr>
+                    <td>UNAUTHENTICATED</td>
+                    <td>User is not logged in</td>
+                    <td>Redirect to login page</td>
+                </tr>
+                <tr>
+                    <td>FETCH_ERROR</td>
+                    <td>Failed to fetch dashboard data</td>
+                    <td>Implement retry mechanism</td>
+                </tr>
+                <tr>
+                    <td>RATE_LIMIT</td>
+                    <td>Too many requests</td>
+                    <td>Implement request throttling</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Profile Page</h2>
+            <h3>Logic</h3>
+            <ul>
+                <li>Display and manage user's personal information</li>
+                <li>Handle avatar uploads and management</li>
+                <li>Show educational background and achievements</li>
+                <li>Display and verify certificates</li>
+                <li>Manage external profile links</li>
+                <li>Track educational progress</li>
+            </ul>
+
+            <h3>Component Structure</h3>
+            <pre>
+&lt;ProfileLayout&gt;
+    &lt;ProfileHeader&gt;
+        &lt;AvatarSection&gt;
+            &lt;Avatar /&gt;
+            &lt;UploadButton /&gt;
+        &lt;/AvatarSection&gt;
+        
+        &lt;BasicInfo&gt;
+            &lt;NameDisplay /&gt;
+            &lt;EmailDisplay /&gt;
+            &lt;EditProfileButton /&gt;
+        &lt;/BasicInfo&gt;
+    &lt;/ProfileHeader&gt;
+    
+    &lt;ProfileContent&gt;
+        &lt;PersonalSection&gt;
+            &lt;NameEditor /&gt;
+            &lt;EmailEditor /&gt;
+            &lt;AvatarManager /&gt;
+        &lt;/PersonalSection&gt;
+        
+        &lt;EducationalDetails&gt;
+            &lt;EducationList&gt;
+                &lt;EducationItem /&gt;
+                &lt;AddEducationButton /&gt;
+            &lt;/EducationList&gt;
+            &lt;SkillsList&gt;
+                &lt;SkillItem /&gt;
+                &lt;AddSkillButton /&gt;
+            &lt;/SkillsList&gt;
+        &lt;/EducationalDetails&gt;
+        
+        &lt;CertificatesSection&gt;
+            &lt;CertificateGrid&gt;
+                &lt;CertificateCard /&gt;
+                &lt;VerificationBadge /&gt;
+            &lt;/CertificateGrid&gt;
+            &lt;AddCertificateButton /&gt;
+        &lt;/CertificatesSection&gt;
+        
+        &lt;ExternalLinks&gt;
+            &lt;SocialLinks /&gt;
+            &lt;PortfolioLinks /&gt;
+            &lt;AddLinkButton /&gt;
+        &lt;/ExternalLinks&gt;
+    &lt;/ProfileContent&gt;
+&lt;/ProfileLayout&gt;
+</pre>
+
+            <h3>GraphQL Schema</h3>
+            <pre>
+type Profile {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    avatar: Avatar
+    education: [Education!]!
+    certificates: [Certificate!]!
+    externalLinks: [ExternalLink!]!
+    skills: [Skill!]!
+}
+
+type Avatar {
+    id: ID!
+    url: String!
+    thumbnailUrl: String!
+    uploadedAt: DateTime!
+}
+
+type Education {
+    id: ID!
+    institution: String!
+    degree: String!
+    field: String!
+    startDate: Date!
+    endDate: Date
+    current: Boolean!
+    description: String
+}
+
+type Certificate {
+    id: ID!
+    title: String!
+    issuingOrganization: String!
+    issueDate: Date!
+    expiryDate: Date
+    credentialId: String!
+    verificationUrl: String!
+    verified: Boolean!
+    image: String
+}
+
+type ExternalLink {
+    id: ID!
+    type: LinkType!
+    url: String!
+    title: String!
+    icon: String
+}
+
+type Skill {
+    id: ID!
+    name: String!
+    level: SkillLevel!
+    endorsements: Int!
+    category: SkillCategory!
+}
+
+enum LinkType {
+    SOCIAL_MEDIA
+    PORTFOLIO
+    GITHUB
+    LINKEDIN
+    WEBSITE
+    OTHER
+}
+
+enum SkillLevel {
+    BEGINNER
+    INTERMEDIATE
+    ADVANCED
+    EXPERT
+}
+
+enum SkillCategory {
+    TECHNICAL
+    SOFT_SKILL
+    LANGUAGE
+    TOOL
+    OTHER
+}
+
+type Query {
+    getProfile: Profile!
+    getEducationHistory: [Education!]!
+    getCertificates: [Certificate!]!
+    getSkills: [Skill!]!
+}
+
+type Mutation {
+    updateProfile(input: UpdateProfileInput!): Profile!
+    updateAvatar(file: Upload!): Avatar!
+    addEducation(input: EducationInput!): Education!
+    updateEducation(id: ID!, input: EducationInput!): Education!
+    deleteEducation(id: ID!): Boolean!
+    
+    addCertificate(input: CertificateInput!): Certificate!
+    updateCertificate(id: ID!, input: CertificateInput!): Certificate!
+    deleteCertificate(id: ID!): Boolean!
+    verifyCertificate(id: ID!): Certificate!
+    
+    addExternalLink(input: ExternalLinkInput!): ExternalLink!
+    updateExternalLink(id: ID!, input: ExternalLinkInput!): ExternalLink!
+    deleteExternalLink(id: ID!): Boolean!
+    
+    addSkill(input: SkillInput!): Skill!
+    updateSkill(id: ID!, input: SkillInput!): Skill!
+    deleteSkill(id: ID!): Boolean!
+    endorseSkill(id: ID!): Skill!
+}
+
+input UpdateProfileInput {
+    firstName: String
+    lastName: String
+    email: String
+    bio: String
+}
+
+input EducationInput {
+    institution: String!
+    degree: String!
+    field: String!
+    startDate: Date!
+    endDate: Date
+    current: Boolean!
+    description: String
+}
+
+input CertificateInput {
+    title: String!
+    issuingOrganization: String!
+    issueDate: Date!
+    expiryDate: Date
+    credentialId: String!
+    verificationUrl: String!
+    image: Upload
+}
+
+input ExternalLinkInput {
+    type: LinkType!
+    url: String!
+    title: String!
+    icon: String
+}
+
+input SkillInput {
+    name: String!
+    level: SkillLevel!
+    category: SkillCategory!
+}
+</pre>
+
+            <h3>API Endpoints</h3>
+            <div class="endpoint">
+                <span class="method post">QUERY</span>
+                <code>getProfile</code>
+                <p>Fetches the complete profile information for the current user</p>
+                <h4>Response</h4>
+                <pre>
+{
+    "data": {
+        "getProfile": {
+            "id": "123",
+            "firstName": "John",
+            "lastName": "Doe",
+            "email": "john@example.com",
+            "avatar": {
+                "url": "https://example.com/avatars/123.jpg",
+                "thumbnailUrl": "https://example.com/avatars/123_thumb.jpg"
+            },
+            "education": [...],
+            "certificates": [...],
+            "externalLinks": [...],
+            "skills": [...]
+        }
+    }
+}
+</pre>
+            </div>
+
+            <div class="endpoint">
+                <span class="method post">MUTATION</span>
+                <code>updateProfile</code>
+                <p>Updates the user's profile information</p>
+                <h4>Variables</h4>
+                <pre>
+{
+    "input": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "john@example.com",
+        "bio": "Full-stack developer with 5 years of experience"
+    }
+}
+</pre>
+            </div>
+
+            <h3>Frontend Implementation</h3>
+            <pre>
+// components/Profile/ProfileHeader.tsx
+import React from 'react';
+import { useQuery } from '@apollo/client';
+import { GET_PROFILE } from '../../graphql/queries';
+
+export const ProfileHeader: React.FC = () => {
+    const { loading, error, data } = useQuery(GET_PROFILE);
+
+    if (loading) return &lt;ProfileSkeleton /&gt;;
+    if (error) return &lt;ErrorMessage error={error} /&gt;;
+
+    const { firstName, lastName, avatar } = data.getProfile;
+
+    return (
+        &lt;div className="profile-header"&gt;
+            &lt;AvatarSection avatar={avatar} /&gt;
+            &lt;div className="profile-info"&gt;
+                &lt;h1&gt;{firstName} {lastName}&lt;/h1&gt;
+                &lt;EditProfileButton /&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    );
+};
+
+// components/Profile/CertificateCard.tsx
+export const CertificateCard: React.FC&lt;CertificateProps&gt; = ({ certificate }) => {
+    const { title, issuingOrganization, issueDate, verified } = certificate;
+
+    return (
+        &lt;div className="certificate-card"&gt;
+            &lt;img src={certificate.image} alt={title} /&gt;
+            &lt;h3&gt;{title}&lt;/h3&gt;
+            &lt;p&gt;{issuingOrganization}&lt;/p&gt;
+            &lt;time&gt;{formatDate(issueDate)}&lt;/time&gt;
+            {verified && &lt;VerificationBadge /&gt;}
+        &lt;/div&gt;
+    );
+};
+</pre>
+
+            <h3>Error Handling</h3>
+            <table>
+                <tr>
+                    <th>Error Code</th>
+                    <th>Description</th>
+                    <th>Resolution</th>
+                </tr>
+                <tr>
+                    <td>INVALID_EMAIL</td>
+                    <td>Email format is invalid</td>
+                    <td>Validate email format before submission</td>
+                </tr>
+                <tr>
+                    <td>AVATAR_TOO_LARGE</td>
+                    <td>Avatar file size exceeds limit</td>
+                    <td>Compress image or choose smaller file</td>
+                </tr>
+                <tr>
+                    <td>CERTIFICATE_VERIFICATION_FAILED</td>
+                    <td>Unable to verify certificate</td>
+                    <td>Check credential ID and verification URL</td>
+                </tr>
+                <tr>
+                    <td>DUPLICATE_SKILL</td>
+                    <td>Skill already exists</td>
+                    <td>Update existing skill instead</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Courses Page</h2>
+            <h3>Logic</h3>
+            <ul>
+                <li>Implement comprehensive course search functionality</li>
+                <li>Display and manage list of all available courses</li>
+                <li>Show and filter list of instructors</li>
+                <li>Enable advanced course filtering and sorting</li>
+                <li>Manage course enrollment and progress tracking</li>
+            </ul>
+
+            <h3>Component Structure</h3>
+            <pre>
+&lt;CoursesLayout&gt;
+    &lt;SearchSection&gt;
+        &lt;SearchBar 
+            placeholder="Search for courses by title, instructor, or topic"
+        /&gt;
+        &lt;FilterSection&gt;
+            &lt;CategoryFilter /&gt;
+            &lt;DifficultyFilter /&gt;
+            &lt;PriceRangeFilter /&gt;
+            &lt;RatingFilter /&gt;
+        &lt;/FilterSection&gt;
+    &lt;/SearchSection&gt;
+
+    &lt;CourseListSection&gt;
+        &lt;CourseFilters&gt;
+            &lt;SortOptions /&gt;
+            &lt;ViewToggle /&gt;
+        &lt;/CourseFilters&gt;
+        
+        &lt;CourseGrid&gt;
+            {courses.map(course => (
+                &lt;CourseCard&gt;
+                    &lt;CourseThumbnail /&gt;
+                    &lt;CourseTitle /&gt;
+                    &lt;InstructorInfo /&gt;
+                    &lt;CourseStats /&gt;
+                    &lt;PriceTag /&gt;
+                &lt;/CourseCard&gt;
+            ))}
+        &lt;/CourseGrid&gt;
+        &lt;Pagination /&gt;
+    &lt;/CourseListSection&gt;
+
+    &lt;InstructorsSection&gt;
+        &lt;InstructorFilters&gt;
+            &lt;ExpertiseFilter /&gt;
+            &lt;RatingFilter /&gt;
+        &lt;/InstructorFilters&gt;
+        
+        &lt;InstructorList&gt;
+            {instructors.map(instructor => (
+                &lt;InstructorCard&gt;
+                    &lt;Avatar /&gt;
+                    &lt;Name /&gt;
+                    &lt;Expertise /&gt;
+                    &lt;CourseCount /&gt;
+                    &lt;StudentCount /&gt;
+                    &lt;Rating /&gt;
+                &lt;/InstructorCard&gt;
+            ))}
+        &lt;/InstructorList&gt;
+        &lt;Pagination /&gt;
+    &lt;/InstructorsSection&gt;
+&lt;/CoursesLayout&gt;
+</pre>
+
+            <h3>GraphQL Schema</h3>
+            <pre>
+type Course {
+    id: ID!
+    title: String!
+    description: String!
+    instructor: Instructor!
+    thumbnail: String!
+    category: Category!
+    subcategories: [Category!]!
+    difficulty: Difficulty!
+    duration: Int!
+    price: Float!
+    rating: Float!
+    studentsEnrolled: Int!
+    lastUpdated: DateTime!
+    language: String!
+    featured: Boolean!
+}
+
+type Instructor {
+    id: ID!
+    name: String!
+    avatar: String!
+    bio: String!
+    expertise: [String!]!
+    courses: [Course!]!
+    totalStudents: Int!
+    averageRating: Float!
+    featured: Boolean!
+}
+
+type Category {
+    id: ID!
+    name: String!
+    description: String
+    courses: [Course!]!
+    subcategories: [Category!]!
+}
+
+enum Difficulty {
+    BEGINNER
+    INTERMEDIATE
+    ADVANCED
+    EXPERT
+}
+
+type Query {
+    # Course Queries
+    searchCourses(
+        filter: CourseFilterInput
+        sort: CourseSortInput
+        pagination: PaginationInput
+    ): CourseConnection!
+    
+    getAllCourses(
+        pagination: PaginationInput
+    ): CourseConnection!
+    
+    getCourseById(id: ID!): Course!
+    
+    # Instructor Queries
+    searchInstructors(
+        filter: InstructorFilterInput
+        sort: InstructorSortInput
+        pagination: PaginationInput
+    ): InstructorConnection!
+    
+    getAllInstructors(
+        pagination: PaginationInput
+    ): InstructorConnection!
+    
+    getInstructorById(id: ID!): Instructor!
+}
+
+input CourseFilterInput {
+    searchTerm: String
+    categories: [ID!]
+    difficulty: [Difficulty!]
+    priceRange: PriceRangeInput
+    rating: Float
+    instructorIds: [ID!]
+}
+
+input InstructorFilterInput {
+    searchTerm: String
+    expertise: [String!]
+    rating: Float
+    courseCount: Int
+}
+
+input PriceRangeInput {
+    min: Float
+    max: Float
+}
+
+type CourseConnection {
+    edges: [CourseEdge!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type InstructorConnection {
+    edges: [InstructorEdge!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type PageInfo {
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String!
+    endCursor: String!
+}
+</pre>
+
+            <h3>Frontend Implementation</h3>
+            <pre>
+// components/Courses/SearchSection.tsx
+import React from 'react';
+import { useQuery } from '@apollo/client';
+import { SEARCH_COURSES } from '../../graphql/queries';
+
+export const SearchSection: React.FC = () => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filters, setFilters] = useState(defaultFilters);
+    
+    const { loading, error, data } = useQuery(SEARCH_COURSES, {
+        variables: {
+            filter: {
+                searchTerm,
+                ...filters
+            }
+        }
+    });
+
+    return (
+        &lt;div className="search-section"&gt;
+            &lt;SearchBar
+                value={searchTerm}
+                onChange={setSearchTerm}
+                placeholder="Search courses..."
+            /&gt;
+            &lt;FilterSection
+                filters={filters}
+                onChange={setFilters}
+            /&gt;
+            {loading && &lt;LoadingSpinner /&gt;}
+            {error && &lt;ErrorMessage error={error} /&gt;}
+        &lt;/div&gt;
+    );
+};
+
+// components/Courses/CourseCard.tsx
+export const CourseCard: React.FC&lt;CourseProps&gt; = ({ course }) => {
+    const {
+        title,
+        instructor,
+        thumbnail,
+        price,
+        rating,
+        studentsEnrolled
+    } = course;
+
+    return (
+        &lt;div className="course-card"&gt;
+            &lt;img 
+                src={thumbnail}
+                alt={title}
+                className="course-thumbnail"
+            /&gt;
+            &lt;div className="course-info"&gt;
+                &lt;h3&gt;{title}&lt;/h3&gt;
+                &lt;div className="instructor-info"&gt;
+                    &lt;img 
+                        src={instructor.avatar}
+                        alt={instructor.name}
+                        className="instructor-avatar"
+                    /&gt;
+                    &lt;span&gt;{instructor.name}&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div className="course-stats"&gt;
+                    &lt;Rating value={rating} /&gt;
+                    &lt;span&gt;{studentsEnrolled} students&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div className="course-price"&gt;
+                    ${price}
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    );
+};
+
+// components/Courses/InstructorCard.tsx
+export const InstructorCard: React.FC&lt;InstructorProps&gt; = ({ instructor }) => {
+    const {
+        name,
+        avatar,
+        expertise,
+        courses,
+        totalStudents,
+        averageRating
+    } = instructor;
+
+    return (
+        &lt;div className="instructor-card"&gt;
+            &lt;img 
+                src={avatar}
+                alt={name}
+                className="instructor-avatar"
+            /&gt;
+            &lt;h4&gt;{name}&lt;/h4&gt;
+            &lt;div className="expertise-tags"&gt;
+                {expertise.map(skill => (
+                    &lt;span className="tag"&gt;{skill}&lt;/span&gt;
+                ))}
+            &lt;/div&gt;
+            &lt;div className="instructor-stats"&gt;
+                &lt;div&gt;{courses.length} courses&lt;/div&gt;
+                &lt;div&gt;{totalStudents} students&lt;/div&gt;
+                &lt;Rating value={averageRating} /&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    );
+};
+</pre>
+
+            <h3>Error Handling</h3>
+            <table>
+                <tr>
+                    <th>Error Code</th>
+                    <th>Description</th>
+                    <th>Resolution</th>
+                </tr>
+                <tr>
+                    <td>SEARCH_FAILED</td>
+                    <td>Course search operation failed</td>
+                    <td>Check search parameters and try again</td>
+                </tr>
+                <tr>
+                    <td>INVALID_FILTERS</td>
+                    <td>Invalid filter combination</td>
+                    <td>Verify filter values and combinations</td>
+                </tr>
+                <tr>
+                    <td>INSTRUCTOR_NOT_FOUND</td>
+                    <td>Instructor profile not found</td>
+                    <td>Verify instructor ID or refresh data</td>
+                </tr>
+                <tr>
+                    <td>PAGINATION_ERROR</td>
+                    <td>Invalid pagination parameters</td>
+                    <td>Check page number and limit values</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Search Page</h2>
+            <h3>Logic</h3>
+            <ul>
+                <li>Implement global search functionality with advanced filters</li>
+                <li>Display personalized course recommendations</li>
+                <li>Show curated random video suggestions</li>
+                <li>Provide real-time search suggestions</li>
+                <li>Enable category-based browsing</li>
+            </ul>
+
+            <h3>Component Structure</h3>
+            <pre>
+&lt;SearchLayout&gt;
+    &lt;SearchHeader&gt;
+        &lt;GlobalSearchBar
+            placeholder="Search for courses, videos, or topics..."
+            withAutocomplete
+        /&gt;
+    &lt;/SearchHeader&gt;
+
+    &lt;RecommendedSection&gt;
+        &lt;SectionTitle&gt;Recommended For You&lt;/SectionTitle&gt;
+        &lt;CourseGrid&gt;
+            {recommendedCourses.map(course => (
+                &lt;CourseCard
+                    key={course.id}
+                    course={course}
+                    showReason
+                /&gt;
+            ))}
+        &lt;/CourseGrid&gt;
+    &lt;/RecommendedSection&gt;
+
+    &lt;RandomVideosSection&gt;
+        &lt;SectionTitle&gt;Discover New Content&lt;/SectionTitle&gt;
+        &lt;VideoGrid&gt;
+            {randomVideos.map(video => (
+                &lt;VideoCard
+                    key={video.id}
+                    video={video}
+                    withPreview
+                /&gt;
+            ))}
+        &lt;/VideoGrid&gt;
+        &lt;RefreshButton onClick={loadNewRandomVideos} /&gt;
+    &lt;/RandomVideosSection&gt;
+
+    &lt;SearchResults&gt;
+        &lt;ResultsHeader&gt;
+            &lt;ResultCount /&gt;
+            &lt;SortOptions /&gt;
+        &lt;/ResultsHeader&gt;
+        
+        &lt;ResultsGrid&gt;
+            {searchResults.map(result => (
+                &lt;ResultCard
+                    key={result.id}
+                    result={result}
+                    highlightTerms={searchTerms}
+                /&gt;
+            ))}
+        &lt;/ResultsGrid&gt;
+        &lt;Pagination /&gt;
+    &lt;/SearchResults&gt;
+&lt;/SearchLayout&gt;
+</pre>
+
+            <h3>GraphQL Schema</h3>
+            <pre>
+type SearchPage {
+    recommendations: CourseRecommendations!
+    randomVideos: [Video!]!
+    recentSearches: [SearchHistory!]!
+    popularSearches: [PopularSearch!]!
+}
+
+type CourseRecommendations {
+    basedOnHistory: [Course!]!
+    basedOnPreferences: [Course!]!
+    trending: [Course!]!
+    newReleases: [Course!]!
+}
+
+type Video {
+    id: ID!
+    title: String!
+    description: String!
+    thumbnailUrl: String!
+    duration: Int!
+    views: Int!
+    course: Course!
+    preview: VideoPreview
+}
+
+type VideoPreview {
+    gifUrl: String!
+    startTime: Int!
+    endTime: Int!
+}
+
+type SearchHistory {
+    id: ID!
+    query: String!
+    timestamp: DateTime!
+    resultCount: Int!
+}
+
+type PopularSearch {
+    query: String!
+    searchCount: Int!
+    trending: Boolean!
+}
+
+type Query {
+    getSearchPage: SearchPage!
+    
+    search(
+        query: String!
+        filters: SearchFilterInput
+        sort: SearchSortInput
+        pagination: PaginationInput
+    ): SearchResults!
+    
+    getRandomVideos(count: Int!): [Video!]!
+    
+    getRecommendedCourses(
+        limit: Int!
+        filters: RecommendationFilterInput
+    ): CourseRecommendations!
+}
+
+input SearchFilterInput {
+    type: [SearchResultType!]
+    duration: DurationRangeInput
+    difficulty: [Difficulty!]
+    rating: Float
+    price: PriceRangeInput
+    language: [Language!]
+}
+
+input RecommendationFilterInput {
+    categories: [ID!]
+    difficulty: [Difficulty!]
+    duration: DurationRangeInput
+    excludeEnrolled: Boolean
+}
+
+enum SearchResultType {
+    COURSE
+    VIDEO
+    LESSON
+    RESOURCE
+}
+</pre>
+
+            <h3>Frontend Implementation</h3>
+            <pre>
+// components/Search/GlobalSearchBar.tsx
+import React, { useState, useEffect } from 'react';
+import { useQuery, useLazyQuery } from '@apollo/client';
+import { SEARCH_SUGGESTIONS } from '../../graphql/queries';
+
+export const GlobalSearchBar: React.FC = () => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const [getSuggestions, { data }] = useLazyQuery(SEARCH_SUGGESTIONS);
+
+    useEffect(() => {
+        if (searchTerm.length >= 2) {
+            getSuggestions({
+                variables: { query: searchTerm }
+            });
+        }
+    }, [searchTerm]);
+
+    return (
+        &lt;div className="search-bar-container"&gt;
+            &lt;input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Search for courses, videos, or topics..."
+                className="global-search-input"
+            /&gt;
+            {data?.suggestions && (
+                &lt;SuggestionsList suggestions={data.suggestions} /&gt;
+            )}
+        &lt;/div&gt;
+    );
+};
+
+// components/Search/RecommendedCourses.tsx
+export const RecommendedCourses: React.FC = () => {
+    const { data, loading } = useQuery(GET_RECOMMENDED_COURSES);
+
+    if (loading) return &lt;CourseGridSkeleton /&gt;;
+
+    return (
+        &lt;section className="recommended-courses"&gt;
+            &lt;h2&gt;Recommended For You&lt;/h2&gt;
+            &lt;div className="course-grid"&gt;
+                {data.recommendations.map(course => (
+                    &lt;CourseCard
+                        key={course.id}
+                        course={course}
+                        showRecommendationReason
+                    /&gt;
+                ))}
+            &lt;/div&gt;
+        &lt;/section&gt;
+    );
+};
+</pre>
+        </div>
+
+        <div class="section">
+            <h2>Analytics Page</h2>
+            <h3>Logic</h3>
+            <ul>
+                <li>Display comprehensive learning analytics</li>
+                <li>Show detailed progress visualizations</li>
+                <li>Present data in interactive tables</li>
+                <li>Track performance metrics</li>
+                <li>Generate detailed reports</li>
+            </ul>
+
+            <h3>Component Structure</h3>
+            <pre>
+&lt;AnalyticsLayout&gt;
+    &lt;AnalyticsDashboard&gt;
+        &lt;MetricCards&gt;
+            &lt;MetricCard
+                title="Total Learning Hours"
+                value={totalHours}
+                trend={hoursTrend}
+            /&gt;
+            &lt;MetricCard
+                title="Courses Completed"
+                value={completedCourses}
+                trend={completionTrend}
+            /&gt;
+            &lt;MetricCard
+                title="Average Score"
+                value={averageScore}
+                trend={scoreTrend}
+            /&gt;
+            &lt;MetricCard
+                title="Active Days Streak"
+                value={streak}
+            /&gt;
+        &lt;/MetricCards&gt;
+
+        &lt;VisualizationSection&gt;
+            &lt;LearningProgressChart
+                data={progressData}
+                timeRange={selectedRange}
+            /&gt;
+            &lt;SkillsRadarChart
+                data={skillsData}
+            /&gt;
+            &lt;ActivityHeatmap
+                data={activityData}
+            /&gt;
+            &lt;PerformanceTrendLine
+                data={performanceData}
+            /&gt;
+        &lt;/VisualizationSection&gt;
+
+        &lt;DetailedTables&gt;
+            &lt;CourseProgressTable
+                data={courseProgress}
+                sortable
+                filterable
+            /&gt;
+            &lt;AssessmentTable
+                data={assessments}
+                sortable
+                filterable
+            /&gt;
+            &lt;TimeSpentTable
+                data={timeSpentData}
+                sortable
+                filterable
+            /&gt;
+        &lt;/DetailedTables&gt;
+
+        &lt;CustomReports&gt;
+            &lt;ReportBuilder /&gt;
+            &lt;ExportOptions /&gt;
+            &lt;ScheduledReports /&gt;
+        &lt;/CustomReports&gt;
+    &lt;/AnalyticsDashboard&gt;
+&lt;/AnalyticsLayout&gt;
+</pre>
+
+            <h3>GraphQL Schema</h3>
+            <pre>
+type Analytics {
+    overview: AnalyticsOverview!
+    progress: LearningProgress!
+    performance: PerformanceMetrics!
+    activities: ActivityMetrics!
+    reports: ReportingOptions!
+}
+
+type AnalyticsOverview {
+    totalLearningHours: Float!
+    completedCourses: Int!
+    averageScore: Float!
+    activeStreak: Int!
+    lastActive: DateTime!
+    totalCertificates: Int!
+    skillsAcquired: Int!
+}
+
+type LearningProgress {
+    byTime: [TimeProgress!]!
+    byCategory: [CategoryProgress!]!
+    bySkill: [SkillProgress!]!
+    milestones: [Milestone!]!
+}
+
+type PerformanceMetrics {
+    assessmentScores: [AssessmentScore!]!
+    quizResults: [QuizResult!]!
+    assignmentGrades: [AssignmentGrade!]!
+    overallProgress: Float!
+}
+
+type ActivityMetrics {
+    dailyActivity: [DailyActivity!]!
+    weeklyTrends: [WeeklyTrend!]!
+    peakPerformance: [PeakPerformance!]!
+    focusHours: [FocusHour!]!
+}
+
+type TimeProgress {
+    date: DateTime!
+    hoursSpent: Float!
+    activitiesCompleted: Int!
+    efficiency: Float!
+}
+
+type CategoryProgress {
+    category: String!
+    completionRate: Float!
+    timeSpent: Float!
+    strength: Float!
+}
+
+type SkillProgress {
+    skill: String!
+    level: Int!
+    progress: Float!
+    lastPracticed: DateTime!
+}
+
+type Milestone {
+    id: ID!
+    title: String!
+    achievedAt: DateTime!
+    type: MilestoneType!
+    reward: Reward
+}
+
+type AssessmentScore {
+    assessmentId: ID!
+    title: String!
+    score: Float!
+    maxScore: Float!
+    completedAt: DateTime!
+    feedback: String
+}
+
+type DailyActivity {
+    date: DateTime!
+    sessionsCount: Int!
+    totalTime: Float!
+    productivity: Float!
+    focusScore: Float!
+}
+
+type Query {
+    getAnalytics(timeRange: TimeRangeInput!): Analytics!
+    
+    getDetailedProgress(
+        category: String
+        timeRange: TimeRangeInput!
+    ): [TimeProgress!]!
+    
+    getPerformanceReport(
+        filters: PerformanceFilterInput
+    ): PerformanceMetrics!
+    
+    getActivityInsights(
+        timeRange: TimeRangeInput!
+    ): ActivityMetrics!
+    
+    generateCustomReport(
+        metrics: [MetricType!]!
+        filters: ReportFilterInput!
+    ): Report!
+}
+
+input TimeRangeInput {
+    start: DateTime!
+    end: DateTime!
+    interval: TimeInterval!
+}
+
+input PerformanceFilterInput {
+    categories: [String!]
+    minScore: Float
+    maxScore: Float
+    dateRange: TimeRangeInput
+}
+
+input ReportFilterInput {
+    metrics: [MetricType!]!
+    categories: [String!]
+    timeRange: TimeRangeInput!
+    format: ReportFormat!
+}
+
+enum TimeInterval {
+    HOURLY
+    DAILY
+    WEEKLY
+    MONTHLY
+}
+
+enum MetricType {
+    LEARNING_TIME
+    COMPLETION_RATE
+    ASSESSMENT_SCORES
+    ACTIVITY_PATTERNS
+    SKILL_PROGRESS
+}
+
+enum ReportFormat {
+    PDF
+    CSV
+    EXCEL
+    JSON
+}
+</pre>
+
+            <h3>Frontend Implementation</h3>
+            <pre>
+// components/Analytics/ProgressChart.tsx
+import React from 'react';
+import { Line } from 'react-chartjs-2';
+import { useQuery } from '@apollo/client';
+import { GET_DETAILED_PROGRESS } from '../../graphql/queries';
+
+export const ProgressChart: React.FC&lt;ProgressChartProps&gt; = ({
+    timeRange
+}) => {
+    const { data, loading } = useQuery(GET_DETAILED_PROGRESS, {
+        variables: { timeRange }
+    });
+
+    if (loading) return &lt;ChartSkeleton /&gt;;
+
+    const chartData = {
+        labels: data.progress.map(p => formatDate(p.date)),
+        datasets: [{
+            label: 'Learning Hours',
+            data: data.progress.map(p => p.hoursSpent),
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+        }]
+    };
+
+    return (
+        &lt;div className="progress-chart"&gt;
+            &lt;h3&gt;Learning Progress&lt;/h3&gt;
+            &lt;Line data={chartData} options={chartOptions} /&gt;
+            &lt;TimeRangeSelector
+                value={timeRange}
+                onChange={handleTimeRangeChange}
+            /&gt;
+        &lt;/div&gt;
+    );
+};
+
+// components/Analytics/PerformanceTable.tsx
+export const PerformanceTable: React.FC = () => {
+    const [filters, setFilters] = useState(defaultFilters);
+    const { data, loading } = useQuery(GET_PERFORMANCE_REPORT, {
+        variables: { filters }
+    });
+
+    return (
+        &lt;div className="performance-table"&gt;
+            &lt;TableFilters
+                filters={filters}
+                onChange={setFilters}
+            /&gt;
+            &lt;Table&gt;
+                &lt;thead&gt;
+                    &lt;tr&gt;
+                        &lt;th&gt;Assessment&lt;/th&gt;
+                        &lt;th&gt;Score&lt;/th&gt;
+                        &lt;th&gt;Date&lt;/th&gt;
+                        &lt;th&gt;Progress&lt;/th&gt;
+                    &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody&gt;
+                    {data?.assessments.map(assessment => (
+                        &lt;tr key={assessment.id}&gt;
+                            &lt;td&gt;{assessment.title}&lt;/td&gt;
+                            &lt;td&gt;{assessment.score}&lt;/td&gt;
+                            &lt;td&gt;{formatDate(assessment.completedAt)}&lt;/td&gt;
+                            &lt;td&gt;
+                                &lt;ProgressBar
+                                    value={assessment.score}
+                                    max={assessment.maxScore}
+                                /&gt;
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                    ))}
+                &lt;/tbody&gt;
+            &lt;/Table&gt;
+            &lt;Pagination /&gt;
+        &lt;/div&gt;
+    );
+};
+</pre>
+
+            <h3>Error Handling</h3>
+            <table>
+                <tr>
+                    <th>Error Code</th>
+                    <th>Description</th>
+                    <th>Resolution</th>
+                </tr>
+                <tr>
+                    <td>DATA_FETCH_ERROR</td>
+                    <td>Failed to fetch analytics data</td>
+                    <td>Retry with smaller time range</td>
+                </tr>
+                <tr>
+                    <td>INVALID_DATE_RANGE</td>
+                    <td>Invalid analytics time range</td>
+                    <td>Ensure end date is after start date</td>
+                </tr>
+                <tr>
+                    <td>REPORT_GENERATION_FAILED</td>
+                    <td>Custom report generation failed</td>
+                    <td>Reduce report complexity or data range</td>
+                </tr>
+                <tr>
+                    <td>METRIC_NOT_AVAILABLE</td>
+                    <td>Requested metric is not available</td>
+                    <td>Check available metrics for time range</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Individual Course Page</h2>
+            <h3>Logic</h3>
+            <ul>
+                <li>Display comprehensive course information and content</li>
+                <li>Provide Q&A and discussion functionality</li>
+                <li>Enable mock tests and assignments</li>
+                <li>Show course progress and analytics</li>
+                <li>Facilitate live video sessions</li>
+                <li>Offer interactive playground environment</li>
+            </ul>
+
+            <h3>Component Structure</h3>
+            <pre>
+&lt;CourseDetailLayout&gt;
+    &lt;CourseHeader&gt;
+        &lt;CourseBanner /&gt;
+        &lt;CourseTitle /&gt;
+        &lt;CourseStats /&gt;
+    &lt;/CourseHeader&gt;
+
+    &lt;CourseNavigation&gt;
+        &lt;NavItem icon="book" label="Course Content" /&gt;
+        &lt;NavItem icon="question" label="Q&A" /&gt;
+        &lt;NavItem icon="test" label="Mock Tests" /&gt;
+        &lt;NavItem icon="assignment" label="Assignments" /&gt;
+        &lt;NavItem icon="announcement" label="Announcements" /&gt;
+        &lt;NavItem icon="video" label="Live Sessions" /&gt;
+        &lt;NavItem icon="chart" label="Progress" /&gt;
+        &lt;NavItem icon="code" label="Playground" /&gt;
+    &lt;/CourseNavigation&gt;
+
+    &lt;CourseContent&gt;
+        &lt;ContentSection&gt;
+            &lt;VideoPlayer /&gt;
+            &lt;VideoList /&gt;
+            &lt;ResourceDownloads /&gt;
+        &lt;/ContentSection&gt;
+
+        &lt;QnASection&gt;
+            &lt;QuestionList /&gt;
+            &lt;AskQuestion /&gt;
+            &lt;DiscussionForum /&gt;
+        &lt;/QnASection&gt;
+
+        &lt;TestSection&gt;
+            &lt;MockTestList&gt;
+                &lt;TestCard /&gt;
+                &lt;TestResults /&gt;
+            &lt;/MockTestList&gt;
+        &lt;/TestSection&gt;
+
+        &lt;AssignmentSection&gt;
+            &lt;AssignmentList&gt;
+                &lt;AssignmentCard /&gt;
+                &lt;SubmissionForm /&gt;
+                &lt;Feedback /&gt;
+            &lt;/AssignmentList&gt;
+        &lt;/AssignmentSection&gt;
+
+        &lt;AnnouncementSection&gt;
+            &lt;AnnouncementList /&gt;
+            &lt;NotificationSettings /&gt;
+        &lt;/AnnouncementSection&gt;
+
+        &lt;MentorSection&gt;
+            &lt;MentorProfile /&gt;
+            &lt;ScheduleSession /&gt;
+            &lt;ContactMentor /&gt;
+        &lt;/MentorSection&gt;
+
+        &lt;LiveSection&gt;
+            &lt;LiveVideoPlayer /&gt;
+            &lt;Chat /&gt;
+            &lt;UpcomingSessions /&gt;
+        &lt;/LiveSection&gt;
+
+        &lt;ProgressSection&gt;
+            &lt;ProgressChart /&gt;
+            &lt;CompletionStatus /&gt;
+            &lt;PerformanceMetrics /&gt;
+        &lt;/ProgressSection&gt;
+
+        &lt;PlaygroundSection&gt;
+            &lt;CodeEditor /&gt;
+            &lt;Console /&gt;
+            &lt;FileExplorer /&gt;
+        &lt;/PlaygroundSection&gt;
+    &lt;/CourseContent&gt;
+&lt;/CourseDetailLayout&gt;
+</pre>
+
+            <h3>GraphQL Schema</h3>
+            <pre>
+type CourseDetail {
+    id: ID!
+    title: String!
+    description: String!
+    mentor: Mentor!
+    content: [CourseModule!]!
+    qna: QnASection!
+    mockTests: [MockTest!]!
+    assignments: [Assignment!]!
+    announcements: [Announcement!]!
+    liveSession: LiveSession
+    progress: Progress!
+    playground: Playground
+}
+
+type Mentor {
+    id: ID!
+    name: String!
+    avatar: String!
+    bio: String!
+    expertise: [String!]!
+    availability: [TimeSlot!]!
+    rating: Float!
+    totalStudents: Int!
+}
+
+type CourseModule {
+    id: ID!
+    title: String!
+    description: String!
+    videos: [Video!]!
+    resources: [Resource!]!
+    order: Int!
+    completed: Boolean!
+}
+
+type Video {
+    id: ID!
+    title: String!
+    description: String!
+    url: String!
+    duration: Int!
+    watched: Boolean!
+    watchedDuration: Int!
+    thumbnailUrl: String!
+}
+
+type QnASection {
+    questions: [Question!]!
+    totalQuestions: Int!
+    answeredQuestions: Int!
+}
+
+type Question {
+    id: ID!
+    title: String!
+    content: String!
+    author: User!
+    createdAt: DateTime!
+    answers: [Answer!]!
+    votes: Int!
+    solved: Boolean!
+}
+
+type MockTest {
+    id: ID!
+    title: String!
+    description: String!
+    duration: Int!
+    totalQuestions: Int!
+    attempts: [TestAttempt!]!
+    dueDate: DateTime
+    available: Boolean!
+}
+
+type Assignment {
+    id: ID!
+    title: String!
+    description: String!
+    dueDate: DateTime!
+    points: Int!
+    submissions: [Submission!]!
+    status: AssignmentStatus!
+}
+
+type Announcement {
+    id: ID!
+    title: String!
+    content: String!
+    createdAt: DateTime!
+    author: Mentor!
+    important: Boolean!
+    attachments: [Resource!]!
+}
+
+type LiveSession {
+    id: ID!
+    title: String!
+    description: String!
+    startTime: DateTime!
+    duration: Int!
+    mentor: Mentor!
+    participants: Int!
+    status: LiveSessionStatus!
+    recordingUrl: String
+}
+
+type Progress {
+    completedModules: Int!
+    totalModules: Int!
+    completedVideos: Int!
+    totalVideos: Int!
+    completedAssignments: Int!
+    totalAssignments: Int!
+    testScores: [TestScore!]!
+    timeSpent: Int!
+    lastAccessed: DateTime!
+}
+
+type Playground {
+    id: ID!
+    language: ProgrammingLanguage!
+    files: [PlaygroundFile!]!
+    settings: PlaygroundSettings!
+}
+
+enum AssignmentStatus {
+    NOT_STARTED
+    IN_PROGRESS
+    SUBMITTED
+    GRADED
+    LATE
+}
+
+enum LiveSessionStatus {
+    SCHEDULED
+    LIVE
+    ENDED
+    CANCELLED
+}
+
+enum ProgrammingLanguage {
+    JAVASCRIPT
+    PYTHON
+    JAVA
+    CPP
+    RUBY
+    GO
+}
+
+type Query {
+    getCourseDetail(id: ID!): CourseDetail!
+    getModuleContent(moduleId: ID!): CourseModule!
+    getQuestions(courseId: ID!, filter: QuestionFilterInput): [Question!]!
+    getMockTests(courseId: ID!): [MockTest!]!
+    getAssignments(courseId: ID!): [Assignment!]!
+    getLiveSessions(courseId: ID!): [LiveSession!]!
+    getProgress(courseId: ID!): Progress!
+}
+
+type Mutation {
+    # Content Interactions
+    markVideoWatched(videoId: ID!): Video!
+    markModuleCompleted(moduleId: ID!): CourseModule!
+    
+    # Q&A
+    askQuestion(input: QuestionInput!): Question!
+    answerQuestion(input: AnswerInput!): Answer!
+    
+    # Tests & Assignments
+    startMockTest(testId: ID!): TestAttempt!
+    submitTestAnswers(attemptId: ID!, answers: [TestAnswerInput!]!): TestResult!
+    submitAssignment(assignmentId: ID!, submission: SubmissionInput!): Submission!
+    
+    # Live Sessions
+    joinLiveSession(sessionId: ID!): LiveSession!
+    leaveLiveSession(sessionId: ID!): Boolean!
+    
+    # Playground
+    createPlaygroundFile(input: PlaygroundFileInput!): PlaygroundFile!
+    updatePlaygroundFile(id: ID!, content: String!): PlaygroundFile!
+    executeCode(fileId: ID!): ExecutionResult!
+}
+
+input QuestionInput {
+    courseId: ID!
+    title: String!
+    content: String!
+    tags: [String!]
+}
+
+input AnswerInput {
+    questionId: ID!
+    content: String!
+}
+
+input TestAnswerInput {
+    questionId: ID!
+    selectedOptions: [ID!]!
+}
+
+input SubmissionInput {
+    files: [Upload!]!
+    comments: String
+}
+
+input PlaygroundFileInput {
+    name: String!
+    content: String!
+    language: ProgrammingLanguage!
+}
+</pre>
+
+            <h3>Frontend Implementation</h3>
+            <pre>
+// components/Course/VideoPlayer.tsx
+import React from 'react';
+import { useQuery, useMutation } from '@apollo/client';
+import { MARK_VIDEO_WATCHED } from '../../graphql/mutations';
+
+export const VideoPlayer: React.FC&lt;VideoPlayerProps&gt; = ({ video }) => {
+    const [markWatched] = useMutation(MARK_VIDEO_WATCHED);
+    
+    const handleVideoEnd = async () => {
+        await markWatched({
+            variables: { videoId: video.id }
+        });
+    };
+
+    return (
+        &lt;div className="video-player"&gt;
+            &lt;video
+                src={video.url}
+                poster={video.thumbnailUrl}
+                controls
+                onEnded={handleVideoEnd}
+            /&gt;
+            &lt;div className="video-info"&gt;
+                &lt;h3&gt;{video.title}&lt;/h3&gt;
+                &lt;p&gt;{video.description}&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    );
+};
+
+// components/Course/MockTest.tsx
+export const MockTest: React.FC&lt;MockTestProps&gt; = ({ test }) => {
+    const [startTest] = useMutation(START_MOCK_TEST);
+    const [submitAnswers] = useMutation(SUBMIT_TEST_ANSWERS);
+
+    const handleStart = async () => {
+        const { data } = await startTest({
+            variables: { testId: test.id }
+        });
+        // Navigate to test interface
+    };
+
+    return (
+        &lt;div className="mock-test-card"&gt;
+            &lt;h3&gt;{test.title}&lt;/h3&gt;
+            &lt;div className="test-info"&gt;
+                &lt;span&gt;{test.totalQuestions} questions&lt;/span&gt;
+                &lt;span&gt;{test.duration} minutes&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;button 
+                onClick={handleStart}
+                disabled={!test.available}
+            &gt;
+                Start Test
+            &lt;/button&gt;
+        &lt;/div&gt;
+    );
+};
+
+// components/Course/Playground.tsx
+export const Playground: React.FC&lt;PlaygroundProps&gt; = ({ language }) => {
+    const [executeCode] = useMutation(EXECUTE_CODE);
+    const [code, setCode] = useState('');
+    const [output, setOutput] = useState('');
+
+    const handleExecute = async () => {
+        const { data } = await executeCode({
+            variables: { 
+                input: {
+                    code,
+                    language
+                }
+            }
+        });
+        setOutput(data.executeCode.output);
+    };
+
+    return (
+        &lt;div className="playground"&gt;
+            &lt;div className="editor-section"&gt;
+                &lt;CodeEditor
+                    value={code}
+                    onChange={setCode}
+                    language={language}
+                /&gt;
+                &lt;button onClick={handleExecute}&gt;
+                    Run Code
+                &lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div className="output-section"&gt;
+                &lt;pre&gt;{output}&lt;/pre&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    );
+};
+</pre>
+
+            <h3>Error Handling</h3>
+            <table>
+                <tr>
+                    <th>Error Code</th>
+                    <th>Description</th>
+                    <th>Resolution</th>
+                </tr>
+                <tr>
+                    <td>VIDEO_PLAYBACK_ERROR</td>
+                    <td>Failed to load or play video</td>
+                    <td>Check network connection and video URL</td>
+                </tr>
+                <tr>
+                    <td>TEST_NOT_AVAILABLE</td>
+                    <td>Mock test is not available</td>
+                    <td>Verify test schedule and eligibility</td>
+                </tr>
+                <tr>
+                    <td>SUBMISSION_FAILED</td>
+                    <td>Assignment submission failed</td>
+                    <td>Check file size and format requirements</td>
+                </tr>
+                <tr>
+                    <td>LIVE_SESSION_FULL</td>
+                    <td>Live session reached capacity</td>
+                    <td>Try joining next available session</td>
+                </tr>
+                <tr>
+                    <td>PLAYGROUND_EXECUTION_ERROR</td>
+                    <td>Code execution failed</td>
+                    <td>Check code syntax and resource limits</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html> 

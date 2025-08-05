@@ -46,9 +46,10 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl font-bold sm:text-4xl gradient-text">Get in Touch</h2>
+            <h2 className="text-3xl font-bold sm:text-4xl gradient-text">Let's Talk</h2>
             <p className="mt-4 text-lg text-gray-300">
-              Ready to transform your business with AI? Let's discuss how we can help you automate and innovate.
+              Want to automate the boring stuff? Build your product faster? Bring your AI ideas to life?
+              We're ready when you are.
             </p>
 
             <dl className="mt-8 space-y-6">

@@ -4,24 +4,24 @@ import { ChevronDownIcon } from '@heroicons/react/24/solid';
 
 const faqs = [
   {
-    question: "How can AI automation help my business?",
-    answer: "AI automation can transform your business by streamlining workflows, reducing manual tasks, and improving efficiency. It can handle repetitive processes, analyze data for insights, automate customer support, and help make data-driven decisions - all while reducing operational costs and freeing your team to focus on strategic work."
+    question: "What kind of projects do you typically work on?",
+    answer: "We specialize in building custom software solutions including CRMs, internal tools, client portals, admin dashboards, AI-powered apps, and automation workflows. Our sweet spot is complex operational software that needs to scale."
   },
   {
-    question: "Is AI automation difficult to integrate?",
-    answer: "Not at all! We've designed our AI automation solutions to be user-friendly and seamless to integrate. Our team handles the technical setup, provides comprehensive training, and offers ongoing support. We ensure a smooth transition with minimal disruption to your existing workflows."
+    question: "How does your CTO-as-a-Service work?",
+    answer: "We provide fractional tech leadership to help you plan, build, and scale. This includes architecture & roadmap planning, hiring and managing developers, weekly reviews, product decisions, and documentation. We can either augment your existing tech team or be your complete tech partner."
   },
   {
-    question: "What industries can benefit from AI automation?",
-    answer: "AI automation can benefit virtually any industry. From healthcare and finance to retail and manufacturing, our solutions adapt to specific industry needs. Common applications include customer service, data analysis, inventory management, quality control, and process optimization across sectors."
+    question: "What's your development process like?",
+    answer: "We follow an agile methodology with weekly sprints and updates. You'll have one main point of contact (your PM) who coordinates with our dev team. We emphasize clear communication, regular demos, and iterative feedback to ensure we're building exactly what you need."
   },
   {
-    question: "Do I need technical knowledge to use AI automation?",
-    answer: "No technical expertise is required! Our platform is designed to be user-friendly and intuitive. We provide a simple interface that allows you to manage and monitor your automation workflows easily. Plus, our support team is always available to help with any questions."
+    question: "How do you handle project handoffs?",
+    answer: "All our systems are built to be handover-ready. We provide comprehensive documentation, clean code with comments, and knowledge transfer sessions. When you're ready to transition to an internal team, we ensure a smooth handoff with no technical debt."
   },
   {
-    question: "What kind of support do you offer?",
-    answer: "We provide comprehensive support including 24/7 technical assistance, regular system updates, dedicated account management, and ongoing training. Our team of experts is always available to help optimize your automation processes and resolve any issues promptly."
+    question: "What technologies do you work with?",
+    answer: "We're tech-agnostic and choose the best tools for your specific needs. Our stack typically includes React/Next.js for frontend, Node.js/Django for backend, various AI tools (OpenAI, Claude, etc.), and automation platforms like Make.com and Zapier. We also work with popular CRMs and can integrate with most third-party tools."
   }
 ];
 
@@ -79,7 +79,7 @@ export default function FAQ() {
             transition={{ duration: 0.5 }}
             className="inline-block px-4 py-1 bg-gray-900 rounded-full text-gray-300 text-sm mb-6"
           >
-            FAQs
+            Common Questions
           </motion.span>
 
           <motion.h2
@@ -89,8 +89,8 @@ export default function FAQ() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl md:text-6xl font-bold text-white mb-6"
           >
-            We've Got the Answers<br />
-            You're Looking For
+            Questions You Might Have<br />
+            About Working With Us
           </motion.h2>
 
           <motion.p
@@ -100,7 +100,7 @@ export default function FAQ() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-gray-400"
           >
-            Quick answers to your AI automation questions.
+            Everything you need to know about our services and process.
           </motion.p>
         </div>
 

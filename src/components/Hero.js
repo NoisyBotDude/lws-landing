@@ -47,8 +47,8 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            Intelligent Automation for{' '}
-            <span className="block">Modern Businesses.</span>
+            Build Fast. Automate Smarter.{' '}
+            <span className="block">Scale Without Limits.</span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -58,7 +58,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            Xtract brings AI automation to your fingertips & streamline tasks.
+            Custom Software & AI Solutions That Actually Work. Learn With Stack is your on-demand tech partner for building fast, scaling smart, and owning your software.
           </motion.p>
 
           {/* CTA Buttons */}
