@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import  logo  from '../logos/2@4x.png'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,15 +18,14 @@ export default function Navbar() {
   const navigation = [
     { name: 'Home', href: '#' },
     { name: 'About', href: '#about' },
-    { name: 'Blog', href: '#blog' },
+    // { name: 'Blog', href: '#blog' },
     { name: 'Contact', href: '#contact' },
   ];
 
   return (
     <motion.header
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'backdrop-blur-xl bg-black/50' : ''
-      }`}
+      className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'backdrop-blur-xl bg-black/50' : ''
+        }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
@@ -40,12 +40,12 @@ export default function Navbar() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <a href="#" className="flex items-center">
-              // <img
-              //   src="/logo.svg"
-              //   alt="Xtract"
-              //   className="h-8 w-auto"
-              // />
-              <span className="ml-2 text-2xl font-bold text-white">BWS</span>
+              <img
+                src={logo}
+                alt="BWS"
+                className="h-12 w-auto"
+              />
+              {/* <span className="ml-2 text-2xl font-bold text-white">BWS</span> */}
             </a>
           </motion.div>
 

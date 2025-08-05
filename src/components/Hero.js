@@ -33,11 +33,9 @@ export default function Hero() {
             transition={{ duration: 0.5 }}
           >
             <span className="px-3 py-1 text-sm text-white bg-[#8B5CF6] rounded-full">
-              New
+            Build With Stack
             </span>
-            <span className="ml-2 text-gray-300">
-              Automated Lead Generation
-            </span>
+            
           </motion.div>
 
           {/* Main heading */}
@@ -58,7 +56,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            Custom Software & AI Solutions That Actually Work. Learn With Stack is your on-demand tech partner for building fast, scaling smart, and owning your software.
+            Custom Software & AI Solutions That Actually Work. Build With Stack is your on-demand tech partner for building fast, scaling smart, and owning your software.
           </motion.p>
 
           {/* CTA Buttons */}

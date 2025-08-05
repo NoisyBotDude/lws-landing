@@ -136,7 +136,7 @@ export default function Benefits() {
             className="text-4xl md:text-6xl font-bold text-white mb-6"
           >
             Why Choose<br />
-            Learn With Stack
+            Build With Stack
           </motion.h2>
 
           <motion.p

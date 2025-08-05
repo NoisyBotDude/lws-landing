@@ -13,7 +13,8 @@ import {
   XMarkIcon,
   MinusIcon,
   ChartBarIcon,
-  CheckIcon
+  CheckIcon,
+  UserGroupIcon
 } from '@heroicons/react/24/outline';
 
 const ProcessStep = ({ step, title, description, children }) => (
@@ -76,7 +77,7 @@ const CaseStudy = ({ logo, title, description, impacts, image }) => (
       <div className="flex items-center gap-3">
         {logo}
       </div>
-      
+
       <div className="space-y-4">
         <h3 className="text-3xl font-bold text-white">"{title}"</h3>
         <p className="text-gray-400 text-lg">{description}</p>
@@ -189,26 +190,39 @@ export default function Process() {
           <ProcessStep
             step="2"
             title="Team Building"
-            description="We assist in hiring and managing developers, building the right team for your needs."
+            description="We handle the heavy lifting of hiring and managing developers, assembling your ideal tech team."
           >
-            <div className="bg-gray-900/50 rounded-xl border border-gray-800 p-4">
-              <div className="flex items-center justify-between mb-4 px-2">
-                <div className="flex items-center gap-2">
-                  <ArrowLeftIcon className="w-4 h-4 text-gray-500" />
-                  <ArrowRightIcon className="w-4 h-4 text-gray-500" />
+            <div className="group relative overflow-hidden">
+              {/* Floating orb accent */}
+              <div className="absolute -right-10 -top-10 w-32 h-32 rounded-full bg-purple-600/10 blur-xl group-hover:bg-purple-600/20 transition-all duration-500" />
+
+              <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-5">
+                {/* Talent Card */}
+                <div className="bg-gray-800/40 backdrop-blur-sm p-5 rounded-xl border border-gray-700 hover:border-purple-500/30 transition-all hover:scale-[1.02]">
+                  <div className="w-10 h-10 mb-4 flex items-center justify-center bg-purple-500/10 rounded-lg border border-purple-500/20">
+                    <UserGroupIcon className="w-5 h-5 text-purple-400" />
+                  </div>
+                  <h3 className="font-semibold text-white mb-2">Talent Matching</h3>
+                  <p className="text-gray-400 text-xs">We find developers with the exact skills your project demands.</p>
                 </div>
-                <div className="flex items-center gap-2">
-                  <MinusIcon className="w-4 h-4 text-gray-500" />
-                  <XMarkIcon className="w-4 h-4 text-gray-500" />
+
+                {/* Process Card */}
+                <div className="bg-gray-800/40 backdrop-blur-sm p-5 rounded-xl border border-gray-700 hover:border-purple-500/30 transition-all hover:scale-[1.02]">
+                  <div className="w-10 h-10 mb-4 flex items-center justify-center bg-purple-500/10 rounded-lg border border-purple-500/20">
+                    <CogIcon className="w-5 h-5 text-purple-400" />
+                  </div>
+                  <h3 className="font-semibold text-white mb-2">Streamlined Process</h3>
+                  <p className="text-gray-400 text-xs">From interviews to onboarding - we optimize every step.</p>
                 </div>
-              </div>
-              <div className="font-mono text-sm space-y-2">
-                <div className="text-[#8B5CF6]">return "Automation triggered!"</div>
-                <div className="text-gray-400">else:</div>
-                <div className="text-gray-400 pl-4">return "No action taken."</div>
-                <div className="text-[#8B5CF6]">def get_status(this):</div>
-                <div className="text-gray-400 pl-4">return f"Status: {'{this.status}'}"</div>
-                <div className="text-gray-500">class AutomationTrigger:</div>
+
+                {/* Growth Card */}
+                <div className="bg-gray-800/40 backdrop-blur-sm p-5 rounded-xl border border-gray-700 hover:border-purple-500/30 transition-all hover:scale-[1.02]">
+                  <div className="w-10 h-10 mb-4 flex items-center justify-center bg-purple-500/10 rounded-lg border border-purple-500/20">
+                    <ChartBarIcon className="w-5 h-5 text-purple-400" />
+                  </div>
+                  <h3 className="font-semibold text-white mb-2">Scalable Growth</h3>
+                  <p className="text-gray-400 text-xs">Easily adjust team size as your project evolves.</p>
+                </div>
               </div>
             </div>
           </ProcessStep>
@@ -224,11 +238,11 @@ export default function Process() {
                 <div className="text-center">
                   <div className="w-16 h-16 bg-[#8B5CF6]/20 rounded-full flex items-center justify-center mb-2">
                     <motion.div
-                      animate={{ 
+                      animate={{
                         rotate: [0, 360],
                         scale: [1, 1.1, 1]
                       }}
-                      transition={{ 
+                      transition={{
                         duration: 3,
                         repeat: Infinity,
                         ease: "linear"
@@ -305,88 +319,6 @@ export default function Process() {
           </ProcessStep>
         </div>
 
-        {/* Case Studies Section */}
-        <div className="mt-32">
-          <div className="text-center mb-16">
-            <motion.span
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="inline-block px-4 py-1 bg-gray-900 rounded-full text-gray-300 text-sm mb-6"
-            >
-              Our Toolkits
-            </motion.span>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl md:text-6xl font-bold text-white mb-6"
-            >
-              Tools & APIs<br />We Work With
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-xl text-gray-400 max-w-3xl mx-auto"
-            >
-              We're tech-agnostic and tool-native. We use whatever it takes to get the job done.
-            </motion.p>
-          </div>
-
-          {/* Case Study - Replace with Toolkit Categories */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                title: "Automation",
-                items: ["Make.com", "Zapier", "Google Apps Script"]
-              },
-              {
-                title: "AI & ML",
-                items: ["OpenAI", "Claude", "LangChain", "GPT Agents"]
-              },
-              {
-                title: "CRM & Tools",
-                items: ["GoHighLevel", "HubSpot", "Monday.com"]
-              },
-              {
-                title: "Infrastructure",
-                items: ["Vercel", "Firebase", "DigitalOcean"]
-              }
-            ].map((category, index) => (
-              <motion.div
-                key={category.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="p-6 bg-gray-900/50 rounded-xl border border-gray-800"
-              >
-                <h3 className="text-xl font-semibold text-white mb-4">{category.title}</h3>
-                <ul className="space-y-2">
-                  {category.items.map((item, i) => (
-                    <li key={item} className="text-gray-400 flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-[#8B5CF6] rounded-full" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Drag to Explore */}
-          <div className="flex items-center justify-center gap-4 mt-12 text-gray-400">
-            <ArrowLeftIcon className="w-5 h-5" />
-            <span className="text-sm uppercase tracking-wider">Drag to explore</span>
-            <ArrowRightIcon className="w-5 h-5" />
-          </div>
-        </div>
       </div>
     </section>
   );
