@@ -1,20 +1,18 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  ShieldCheckIcon,
   ClockIcon,
-  DocumentCheckIcon,
   ArrowsPointingOutIcon,
   CodeBracketIcon,
   ChatBubbleLeftRightIcon,
   CogIcon,
   FunnelIcon,
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  XMarkIcon,
-  MinusIcon,
   ChartBarIcon,
   CheckIcon,
-  UserGroupIcon
+  UserGroupIcon,
+  CpuChipIcon,
+  ServerStackIcon,
+  UserIcon,
 } from '@heroicons/react/24/outline';
 
 const ProcessStep = ({ step, title, description, children }) => (
@@ -58,53 +56,9 @@ const ProcessStep = ({ step, title, description, children }) => (
   </motion.div>
 );
 
-const CaseStudy = ({ logo, title, description, impacts, image }) => (
-  <motion.div
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5 }}
-    className="grid lg:grid-cols-2 gap-12 items-center"
-  >
-    <div className="relative aspect-square">
-      <img
-        src={image}
-        alt={title}
-        className="w-full h-full object-cover rounded-2xl"
-      />
-    </div>
-    <div className="space-y-8">
-      <div className="flex items-center gap-3">
-        {logo}
-      </div>
-
-      <div className="space-y-4">
-        <h3 className="text-3xl font-bold text-white">"{title}"</h3>
-        <p className="text-gray-400 text-lg">{description}</p>
-      </div>
-
-      <div className="space-y-4">
-        <h4 className="text-xl text-white">Impact :</h4>
-        <ul className="space-y-3">
-          {impacts.map((impact, index) => (
-            <motion.li
-              key={impact}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="text-gray-300 text-lg"
-            >
-              • {impact}
-            </motion.li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  </motion.div>
-);
-
 export default function Process() {
+  const [hoveredLayer, setHoveredLayer] = useState(null);
+
   return (
     <section id="process" className="relative py-24 overflow-hidden">
       {/* Background with slight gradient */}
@@ -150,38 +104,87 @@ export default function Process() {
             title="Architecture & Planning"
             description="We help with architecture & roadmap planning, ensuring your tech aligns with business goals."
           >
-            <div className="grid grid-cols-2 gap-4">
-              <div className="aspect-square bg-gray-900/50 rounded-xl border border-gray-800 p-6 flex items-center justify-center">
-                <motion.div
-                  initial={{ rotate: 0 }}
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="relative w-32 h-32"
-                >
-                  <div className="absolute inset-0 rounded-full border-2 border-[#8B5CF6] border-t-transparent" style={{ clipPath: 'polygon(0 0, 15% 0, 15% 100%, 0 100%)' }} />
-                </motion.div>
-                <p className="text-gray-400 text-sm absolute">Analyzing current workflow...</p>
+            <div className="relative">
+              {/* 3D Isometric Grid Background */}
+              <div className="absolute inset-0 overflow-hidden opacity-20">
+                <div className="absolute inset-0 bg-[length:40px_40px] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)]" />
               </div>
-              <div className="space-y-2">
-                {[
-                  { icon: ShieldCheckIcon, text: 'System check' },
-                  { icon: ClockIcon, text: 'Process check' },
-                  { icon: DocumentCheckIcon, text: 'Speed check' },
-                  { icon: ArrowsPointingOutIcon, text: 'Manual work' },
-                  { icon: CodeBracketIcon, text: 'Repetative task' }
-                ].map((item, index) => (
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 relative z-10">
+                {/* Interactive 3D Blueprint */}
+
+                <div className="relative h-64 lg:h-auto">
                   <motion.div
-                    key={item.text}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="flex items-center gap-3 p-2 bg-gray-900 rounded-lg text-gray-400 text-sm"
+                    animate={{ y: hoveredLayer === 'data' ? -10 : 0 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                    onHoverStart={() => setHoveredLayer('data')}
+                    onHoverEnd={() => setHoveredLayer(null)}
+                    className="absolute top-0 left-0 w-32 h-32 bg-[#8B5CF6]/10 border border-[#8B5CF6]/30 rounded-lg shadow-lg backdrop-blur-sm"
+                    style={{ transform: 'rotateX(60deg) rotateZ(45deg) translateZ(0)' }}
                   >
-                    <item.icon className="w-4 h-4" />
-                    <span>{item.text}</span>
+                    <ServerStackIcon className="w-8 h-8 text-[#8B5CF6] mx-auto mt-4" />
+                    <p className="text-center text-xs text-[#8B5CF6] mt-2">Data Layer</p>
                   </motion.div>
-                ))}
+
+                  <motion.div
+                    animate={{ y: hoveredLayer === 'logic' ? -10 : 0 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                    onHoverStart={() => setHoveredLayer('logic')}
+                    onHoverEnd={() => setHoveredLayer(null)}
+                    className="absolute top-16 left-16 w-32 h-32 bg-blue-500/10 border border-blue-500/30 rounded-lg shadow-lg backdrop-blur-sm"
+                    style={{ transform: 'rotateX(60deg) rotateZ(45deg) translateZ(20px)' }}
+                  >
+                    <CpuChipIcon className="w-8 h-8 text-blue-400 mx-auto mt-4" />
+                    <p className="text-center text-xs text-blue-400 mt-2">Logic Layer</p>
+                  </motion.div>
+
+                  <motion.div
+                    animate={{ y: hoveredLayer === 'presentation' ? -10 : 0 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                    onHoverStart={() => setHoveredLayer('presentation')}
+                    onHoverEnd={() => setHoveredLayer(null)}
+                    className="absolute top-8 left-32 w-32 h-32 bg-purple-500/10 border border-purple-500/30 rounded-lg shadow-lg backdrop-blur-sm"
+                    style={{ transform: 'rotateX(60deg) rotateZ(45deg) translateZ(40px)' }}
+                  >
+                    <UserIcon className="w-8 h-8 text-purple-400 mx-auto mt-4" />
+                    <p className="text-center text-xs text-purple-400 mt-2">Presentation</p>
+                  </motion.div>
+                </div>
+
+                {/* Planning Process */}
+                <div className="space-y-3">
+                  {[
+                    {
+                      icon: ClockIcon,
+                      text: 'Performance Review',
+                      description: 'Evaluating current system speed and bottlenecks'
+                    },
+                    {
+                      icon: CodeBracketIcon,
+                      text: 'Automation',
+                      description: 'Identifying repetitive tasks to automate'
+                    }
+                  ].map((item, index) => (
+                    <motion.div
+                      key={item.text}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="group p-4 bg-gray-900/50 rounded-xl border border-gray-800 hover:border-[#8B5CF6]/30 transition-colors"
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className="w-10 h-10 flex items-center justify-center bg-[#8B5CF6]/10 rounded-lg border border-[#8B5CF6]/20 group-hover:bg-[#8B5CF6]/20 transition-colors">
+                          <item.icon className="w-5 h-5 text-[#8B5CF6]" />
+                        </div>
+                        <div>
+                          <h4 className="text-white text-sm font-medium">{item.text}</h4>
+                          <p className="text-gray-400 text-xs mt-1">{item.description}</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             </div>
           </ProcessStep>

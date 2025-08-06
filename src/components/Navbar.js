@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import  logo  from '../logos/2@4x.png'
+import logo from '../logos/2@4x.png'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,7 +63,8 @@ export default function Navbar() {
                 {item.name}
               </motion.a>
             ))}
-            <motion.button
+            <motion.a
+              href='https://calendly.com/admin-learnwithstack/30min'
               className="ml-4 px-6 py-2.5 rounded-lg bg-[#8B5CF6] text-white hover:bg-[#7C3AED] transition-colors"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -72,7 +73,7 @@ export default function Navbar() {
               whileTap={{ scale: 0.95 }}
             >
               Book a call
-            </motion.button>
+            </motion.a>
           </div>
 
           {/* Mobile menu button */}
