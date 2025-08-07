@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import { Link } from 'react-router-dom';
 
 export default function Hero() {
   return (
@@ -66,15 +67,18 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <motion.a
-              href="#contact"
-              className="px-6 py-3 bg-[#8B5CF6] text-white rounded-lg flex items-center justify-center hover:bg-[#7C3AED] transition-colors w-full sm:w-auto"
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Get in touch
-              <ArrowRightIcon className="w-4 h-4 ml-2" />
-            </motion.a>
+              <Link
+                to="/contact"
+                className="px-6 py-3 bg-[#8B5CF6] text-white rounded-lg flex items-center justify-center hover:bg-[#7C3AED] transition-colors w-full sm:w-auto"
+              >
+                Get in touch
+                <ArrowRightIcon className="w-4 h-4 ml-2" />
+              </Link>
+            </motion.div>
             <motion.a
               href="#services"
               className="px-6 py-3 bg-gray-800 text-white rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors w-full sm:w-auto"

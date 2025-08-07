@@ -1,10 +1,8 @@
-import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { EnvelopeIcon, PhoneIcon, ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/24/outline';
 import { useEffect, useState } from 'react';
 
 export default function Contact() {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     firstName: '',
@@ -22,19 +20,10 @@ export default function Contact() {
 
   const [errors, setErrors] = useState({});
 
+// when the page is reload open at the top of the page
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      const { clientX, clientY } = e;
-      const { innerWidth, innerHeight } = window;
-      const x = clientX / innerWidth;
-      const y = clientY / innerHeight;
-      mouseX.set(x);
-      mouseY.set(y);
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [mouseX, mouseY]);
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleInputChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -491,21 +480,6 @@ export default function Contact() {
 
   return (
     <section id="contact" className="section">
-      {/* Animated background gradient */}
-      <motion.div
-        className="absolute inset-0 opacity-20"
-        style={{
-          background: useMotionTemplate`radial-gradient(
-            circle at ${mouseX.get() * 100}% ${mouseY.get() * 100}%,
-            rgba(139, 92, 246, 0.3) 0%,
-            rgba(124, 58, 237, 0.1) 25%,
-            rgba(0, 0, 0, 0) 50%
-          )`
-        }}
-      />
-
-      {/* Spacey background effect */}
-      <div className="spacey-bg" />
 
       <div className="container">
         <div className="max-w-4xl mx-auto">
@@ -551,7 +525,6 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <div className="moving-gradient" />
             <div className="relative z-10">
               <form onSubmit={handleSubmit} className="space-y-6">
                 {renderStep()}

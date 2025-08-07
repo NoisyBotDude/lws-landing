@@ -1,35 +1,24 @@
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Services from './components/Services';
-import Process from './components/Process';
-import Benefits from './components/Benefits';
-import Contact from './components/Contact';
 import Footer from './components/Footer';
-import TrustedBy from './components/TrustedBy';
-import Testimonials from './components/Testimonials';
-import FAQ from './components/FAQ';
 import BackgroundGradient from './components/BackgroundGradient';
-import About from './components/About';
+import Home from './pages/Home';
+import ContactPage from './pages/ContactPage';
 
 function App() {
   return (
-    <>
+    <Router>
       <BackgroundGradient />
       <main className="relative min-h-screen bg-transparent">
         <Navbar />
-        <Hero />
-        <TrustedBy />
-        <Services />
-        <About />
-        <Process />
-        <Benefits />
-        <Testimonials />
-        <FAQ />
-        <Contact />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
         <Footer />
       </main>
-    </>
+    </Router>
   );
 }
 

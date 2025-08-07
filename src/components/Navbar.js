@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../logos/2@4x.png'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,9 +18,9 @@ export default function Navbar() {
   }, []);
 
   const navigation = [
-    { name: 'Home', href: '#' },
-    { name: 'About', href: '#about' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/#about' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   return (
@@ -38,29 +40,45 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <a href="#" className="flex items-center">
+            <Link to="/" className="flex items-center">
               <img
                 src={logo}
                 alt="BWS"
                 className="h-12 w-auto"
               />
               {/* <span className="ml-2 text-2xl font-bold text-white">BWS</span> */}
-            </a>
+            </Link>
           </motion.div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center md:space-x-8">
             {navigation.map((item, index) => (
-              <motion.a
+              <motion.div
                 key={item.name}
-                href={item.href}
-                className="text-gray-300 hover:text-white transition-colors"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                {item.name}
-              </motion.a>
+                {item.href.startsWith('/#') ? (
+                  <a
+                    href={item.href}
+                    className="text-gray-300 hover:text-white transition-colors"
+                  >
+                    {item.name}
+                  </a>
+                ) : (
+                  <Link
+                    to={item.href}
+                    className={`transition-colors ${
+                      location.pathname === item.href
+                        ? 'text-white'
+                        : 'text-gray-300 hover:text-white'
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                )}
+              </motion.div>
             ))}
             <motion.a
               href='https://calendly.com/admin-learnwithstack/30min'
@@ -109,13 +127,28 @@ export default function Navbar() {
             >
               <div className="px-2 pt-2 pb-3 space-y-1 backdrop-blur-xl bg-black/50 rounded-lg">
                 {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg"
-                  >
-                    {item.name}
-                  </a>
+                  <div key={item.name}>
+                    {item.href.startsWith('/#') ? (
+                      <a
+                        href={item.href}
+                        className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg"
+                      >
+                        {item.name}
+                      </a>
+                    ) : (
+                      <Link
+                        to={item.href}
+                        className={`block px-3 py-2 text-base font-medium rounded-lg transition-colors ${
+                          location.pathname === item.href
+                            ? 'text-white bg-gray-800'
+                            : 'text-gray-300 hover:text-white hover:bg-gray-800'
+                        }`}
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    )}
+                  </div>
                 ))}
                 <button className="w-full mt-4 px-6 py-2.5 rounded-lg bg-[#8B5CF6] text-white hover:bg-[#7C3AED] transition-colors">
                   Book a call
