@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 
 const AnimatedCard = ({ children, className = '' }) => {
   const ref = useRef(null);

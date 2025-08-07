@@ -1,16 +1,10 @@
 import { motion } from 'framer-motion';
 import AnimatedCard from './AnimatedCard';
 import {
-  ClockIcon,
-  CurrencyDollarIcon,
-  UserGroupIcon,
   DocumentTextIcon,
   CheckIcon,
-  PlusIcon,
   ArrowRightIcon,
   ChartBarIcon,
-  DocumentMagnifyingGlassIcon,
-  ShareIcon,
   CalendarIcon,
   ArrowPathIcon,
   ArrowLeftIcon,
@@ -29,7 +23,6 @@ import {
   ArrowUpTrayIcon,
   ChevronRightIcon,
   CpuChipIcon,
-  RocketLaunchIcon
 } from '@heroicons/react/24/outline';
 
 const ServiceSection = ({ tag, title, description, children, isReversed = false }) => (
