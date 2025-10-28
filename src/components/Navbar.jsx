@@ -17,6 +17,25 @@ export default function Navbar() {
 		return () => window.removeEventListener('scroll', handleScroll);
 	}, []);
 
+	// Prevent body scroll when mobile menu is open
+	useEffect(() => {
+		if (isOpen) {
+			document.body.style.overflow = 'hidden';
+			document.body.style.position = 'fixed';
+			document.body.style.width = '100%';
+		} else {
+			document.body.style.overflow = '';
+			document.body.style.position = '';
+			document.body.style.width = '';
+		}
+		
+		return () => {
+			document.body.style.overflow = '';
+			document.body.style.position = '';
+			document.body.style.width = '';
+		};
+	}, [isOpen]);
+
 	const navigation = [
 		{ name: 'Home', href: '/' },
 		{ name: 'About', href: '/about' },
@@ -83,6 +102,7 @@ export default function Navbar() {
 						))}
 						<motion.a
 							href='https://calendly.com/admin-learnwithstack/ghl_custom_dashboard_build'
+							target='blank'
 							className="ml-4 px-6 py-2.5 rounded-lg bg-[#8B5CF6] text-white hover:bg-[#7C3AED] transition-colors"
 							initial={{ opacity: 0, scale: 0.9 }}
 							animate={{ opacity: 1, scale: 1 }}
@@ -116,44 +136,61 @@ export default function Navbar() {
 					</motion.div>
 				</div>
 
-				{/* Mobile Navigation */}
+				{/* Mobile Navigation - Full Screen */}
 				<AnimatePresence>
 					{isOpen && (
 						<motion.div
-							className="md:hidden"
-							initial={{ opacity: 0, height: 0 }}
-							animate={{ opacity: 1, height: 'auto' }}
-							exit={{ opacity: 0, height: 0 }}
-							transition={{ duration: 0.3 }}
+							className="md:hidden fixed inset-0 top-20 z-40 overflow-hidden"
+							initial={{ opacity: 0, x: '100%' }}
+							animate={{ opacity: 1, x: 0 }}
+							exit={{ opacity: 0, x: '100%' }}
+							transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+							style={{ transform: 'translateZ(0)' }}
 						>
-							<div className="px-2 pt-2 pb-3 space-y-1 backdrop-blur-xl bg-black/50 rounded-lg">
-								{navigation.map((item) => (
-									<div key={item.name}>
-										{item.href.startsWith('/#') ? (
-											<a
-												href={item.href}
-												className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg"
-											>
-												{item.name}
-											</a>
-										) : (
-											<Link
-												to={item.href}
-												replace={item.name === "About" ? true : false}
-												className={`block px-3 py-2 text-base font-medium rounded-lg transition-colors ${location.pathname === item.href
-														? 'text-white bg-gray-800'
-														: 'text-gray-300 hover:text-white hover:bg-gray-800'
-													}`}
-												onClick={() => setIsOpen(false)}
-											>
-												{item.name}
-											</Link>
-										)}
-									</div>
-								))}
-								<button className="w-full mt-4 px-6 py-2.5 rounded-lg bg-[#8B5CF6] text-white hover:bg-[#7C3AED] transition-colors">
+							<div className="h-full w-full backdrop-blur-xl bg-black/95 px-6 pt-8 pb-6 flex flex-col overflow-y-auto">
+								<nav className="flex-1 space-y-2">
+									{navigation.map((item, index) => (
+										<motion.div
+											key={item.name}
+											initial={{ opacity: 0, x: 20 }}
+											animate={{ opacity: 1, x: 0 }}
+											transition={{ duration: 0.3, delay: index * 0.05, ease: [0.4, 0, 0.2, 1] }}
+										>
+											{item.href.startsWith('/#') ? (
+												<a
+													href={item.href}
+													className="block px-4 py-4 text-lg font-medium text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-xl transition-colors"
+													onClick={() => setIsOpen(false)}
+												>
+													{item.name}
+												</a>
+											) : (
+												<Link
+													to={item.href}
+													replace={item.name === "About" ? true : false}
+													className={`block px-4 py-4 text-lg font-medium rounded-xl transition-colors ${location.pathname === item.href
+															? 'text-white bg-gray-800/50'
+															: 'text-gray-300 hover:text-white hover:bg-gray-800/50'
+														}`}
+													onClick={() => setIsOpen(false)}
+												>
+													{item.name}
+												</Link>
+											)}
+										</motion.div>
+									))}
+								</nav>
+								<motion.a
+									href='https://calendly.com/admin-learnwithstack/ghl_custom_dashboard_build'
+									target='blank'
+									className="w-full px-6 py-4 rounded-xl bg-gradient-to-r from-[#8B5CF6] to-purple-600 text-white text-center font-semibold hover:from-[#7C3AED] hover:to-purple-700 transition-all active:scale-95"
+									initial={{ opacity: 0, y: 20 }}
+									animate={{ opacity: 1, y: 0 }}
+									transition={{ duration: 0.3, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
+									onClick={() => setIsOpen(false)}
+								>
 									Book a call
-								</button>
+								</motion.a>
 							</div>
 						</motion.div>
 					)}

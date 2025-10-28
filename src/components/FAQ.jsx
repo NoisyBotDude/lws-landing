@@ -35,40 +35,43 @@ const FAQItem = ({ faq, isOpen, onToggle, index }) => {
 		<motion.div
 			initial={{ opacity: 0, y: 20 }}
 			whileInView={{ opacity: 1, y: 0 }}
-			viewport={{ once: true }}
-			transition={{ duration: 0.5, delay: index * 0.1 }}
+			viewport={{ once: true, margin: "-50px" }}
+			transition={{ duration: 0.4, delay: index * 0.08 }}
 			className="group relative"
 		>
-			{/* Card with glass-morphism effect */}
-			<div className={`relative bg-gradient-to-br from-gray-900/80 to-gray-900/40 backdrop-blur-sm rounded-2xl border transition-all duration-300 overflow-hidden ${
-				isOpen 
-					? 'border-[#8B5CF6]/50 shadow-lg shadow-[#8B5CF6]/10' 
-					: 'border-gray-800 hover:border-gray-700'
-			}`}>
-				{/* Gradient overlay on hover/open */}
-				<div className={`absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/0 via-[#8B5CF6]/5 to-purple-600/0 transition-opacity duration-300 ${
+			{/* Card with glass-morphism effect - GPU accelerated */}
+			<div 
+				className={`relative bg-gradient-to-br from-gray-900/80 to-gray-900/40 md:backdrop-blur-sm rounded-2xl border transition-all duration-300 overflow-hidden will-change-[border-color,box-shadow] ${
+					isOpen 
+						? 'border-[#8B5CF6]/50 shadow-lg shadow-[#8B5CF6]/10' 
+						: 'border-gray-800 hover:border-gray-700'
+				}`}
+				style={{ transform: 'translateZ(0)' }}
+			>
+				{/* Gradient overlay on hover/open - hidden on mobile for performance */}
+				<div className={`hidden md:block absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/0 via-[#8B5CF6]/5 to-purple-600/0 transition-opacity duration-300 ${
 					isOpen ? 'opacity-100' : 'opacity-0 group-hover:opacity-50'
 				}`} />
 				
 				{/* Question button */}
 				<button
 					onClick={onToggle}
-					className="relative w-full px-6 py-6 flex items-start gap-4 text-left focus:outline-none"
+					className="relative w-full px-4 sm:px-6 py-5 sm:py-6 flex items-start gap-3 sm:gap-4 text-left focus:outline-none"
 				>
 					{/* Icon container */}
-					<div className={`flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 ${
+					<div className={`flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center transition-all duration-300 will-change-[background-color,transform] ${
 						isOpen 
 							? 'bg-[#8B5CF6]/20 scale-110' 
 							: 'bg-gray-800/50 group-hover:bg-gray-800'
 					}`}>
-						<QuestionMarkCircleIcon className={`w-5 h-5 transition-colors duration-300 ${
+						<QuestionMarkCircleIcon className={`w-4 h-4 sm:w-5 sm:h-5 transition-colors duration-300 ${
 							isOpen ? 'text-[#8B5CF6]' : 'text-gray-400 group-hover:text-gray-300'
 						}`} />
 					</div>
 					
 					{/* Question text */}
-					<div className="flex-1 pt-1">
-						<span className={`text-lg font-semibold transition-colors duration-300 ${
+					<div className="flex-1 pt-0.5 sm:pt-1">
+						<span className={`text-base sm:text-lg font-semibold transition-colors duration-300 ${
 							isOpen ? 'text-white' : 'text-gray-200 group-hover:text-white'
 						}`}>
 							{faq.question}
@@ -76,20 +79,21 @@ const FAQItem = ({ faq, isOpen, onToggle, index }) => {
 					</div>
 					
 					{/* Toggle icon */}
-					<div className="flex-shrink-0 ml-4">
+					<div className="flex-shrink-0 ml-2 sm:ml-4">
 						<motion.div
 							animate={{ rotate: isOpen ? 180 : 0 }}
-							transition={{ duration: 0.3, ease: "easeInOut" }}
-							className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-300 ${
+							transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+							className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center transition-all duration-300 will-change-transform ${
 								isOpen 
 									? 'bg-[#8B5CF6]/20' 
 									: 'bg-gray-800/50 group-hover:bg-gray-800'
 							}`}
+							style={{ transform: 'translateZ(0)' }}
 						>
 							{isOpen ? (
-								<MinusIcon className="w-5 h-5 text-[#8B5CF6]" />
+								<MinusIcon className="w-4 h-4 sm:w-5 sm:h-5 text-[#8B5CF6]" />
 							) : (
-								<PlusIcon className="w-5 h-5 text-gray-400 group-hover:text-gray-300" />
+								<PlusIcon className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 group-hover:text-gray-300" />
 							)}
 						</motion.div>
 					</div>
@@ -102,14 +106,15 @@ const FAQItem = ({ faq, isOpen, onToggle, index }) => {
 						height: isOpen ? 'auto' : 0,
 						opacity: isOpen ? 1 : 0
 					}}
-					transition={{ duration: 0.3, ease: "easeInOut" }}
-					className="overflow-hidden"
+					transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+					className="overflow-hidden will-change-[height,opacity]"
+					style={{ transform: 'translateZ(0)' }}
 				>
-					<div className="relative px-6 pb-6 pl-20">
-						{/* Decorative line */}
-						<div className="absolute left-10 top-0 w-0.5 h-full bg-gradient-to-b from-[#8B5CF6]/50 to-transparent" />
+					<div className="relative px-4 sm:px-6 pb-5 sm:pb-6 pl-14 sm:pl-20">
+						{/* Decorative line - hidden on mobile for performance */}
+						<div className="hidden md:block absolute left-10 top-0 w-0.5 h-full bg-gradient-to-b from-[#8B5CF6]/50 to-transparent" />
 						
-						<p className="text-gray-400 leading-relaxed">
+						<p className="text-sm sm:text-base text-gray-400 leading-relaxed">
 							{faq.answer}
 						</p>
 					</div>
@@ -131,24 +136,26 @@ export default function FAQ() {
 
 			<div className="container relative z-10 max-w-4xl mx-auto px-4">
 				{/* Header */}
-				<div className="text-center mb-16">
+				<div className="text-center mb-12 sm:mb-16">
 					<motion.div
-						initial={{ opacity: 0, scale: 0.9 }}
+						initial={{ opacity: 0, scale: 0.95 }}
 						whileInView={{ opacity: 1, scale: 1 }}
-						viewport={{ once: true }}
-						transition={{ duration: 0.5 }}
-						className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-gray-900/80 to-gray-800/80 backdrop-blur-sm rounded-full border border-gray-800 mb-6"
+						viewport={{ once: true, margin: "-100px" }}
+						transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+						className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-gray-900/80 to-gray-800/80 md:backdrop-blur-sm rounded-full border border-gray-800 mb-4 sm:mb-6 will-change-[opacity,transform]"
+						style={{ transform: 'translateZ(0)' }}
 					>
 						<SparklesIcon className="w-4 h-4 text-[#8B5CF6]" />
 						<span className="text-gray-300 text-sm font-medium">Common Questions</span>
 					</motion.div>
 
 					<motion.h2
-						initial={{ opacity: 0, y: 20 }}
+						initial={{ opacity: 0, y: 15 }}
 						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-						transition={{ duration: 0.5, delay: 0.1 }}
-						className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight"
+						viewport={{ once: true, margin: "-100px" }}
+						transition={{ duration: 0.4, delay: 0.08, ease: [0.4, 0, 0.2, 1] }}
+						className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight will-change-[opacity,transform]"
+						style={{ transform: 'translateZ(0)' }}
 					>
 						Questions You Might Have<br />
 						<span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-400">
@@ -157,11 +164,12 @@ export default function FAQ() {
 					</motion.h2>
 
 					<motion.p
-						initial={{ opacity: 0, y: 20 }}
+						initial={{ opacity: 0, y: 15 }}
 						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-						transition={{ duration: 0.5, delay: 0.2 }}
-						className="text-xl text-gray-400 max-w-3xl mx-auto"
+						viewport={{ once: true, margin: "-100px" }}
+						transition={{ duration: 0.4, delay: 0.16, ease: [0.4, 0, 0.2, 1] }}
+						className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto will-change-[opacity,transform]"
+						style={{ transform: 'translateZ(0)' }}
 					>
 						Everything you need to know about our services and process.
 					</motion.p>
@@ -182,27 +190,29 @@ export default function FAQ() {
 
 				{/* Bottom CTA */}
 				<motion.div
-					initial={{ opacity: 0, y: 20 }}
+					initial={{ opacity: 0, y: 15 }}
 					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.5, delay: 0.4 }}
-					className="mt-16 text-center"
+					viewport={{ once: true, margin: "-50px" }}
+					transition={{ duration: 0.4, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
+					className="mt-12 sm:mt-16 text-center will-change-[opacity,transform]"
+					style={{ transform: 'translateZ(0)' }}
 				>
-					<div className="relative inline-block p-8 bg-gradient-to-br from-gray-900/80 to-gray-900/40 backdrop-blur-sm rounded-2xl border border-gray-800 overflow-hidden group hover:border-[#8B5CF6]/30 transition-all">
-						{/* Animated gradient background */}
-						<div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/0 via-[#8B5CF6]/10 to-purple-600/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+					<div className="relative inline-block p-6 sm:p-8 bg-gradient-to-br from-gray-900/80 to-gray-900/40 md:backdrop-blur-sm rounded-2xl border border-gray-800 overflow-hidden group hover:border-[#8B5CF6]/30 transition-all will-change-[border-color]">
+						{/* Animated gradient background - hidden on mobile for performance */}
+						<div className="hidden md:block absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/0 via-[#8B5CF6]/10 to-purple-600/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 						
 						<div className="relative z-10">
-							<p className="text-gray-300 text-lg mb-6 font-medium">
+							<p className="text-gray-300 text-base sm:text-lg mb-4 sm:mb-6 font-medium">
 								Still have questions? We're here to help.
 							</p>
 							<Link
 								to="/contact"
-								className="group/btn inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#8B5CF6] to-purple-600 hover:from-[#7C3AED] hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-2xl hover:shadow-[#8B5CF6]/40 hover:-translate-y-1 active:translate-y-0"
+								className="group/btn inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-[#8B5CF6] to-purple-600 hover:from-[#7C3AED] hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-2xl hover:shadow-[#8B5CF6]/40 active:scale-95 will-change-[transform,box-shadow]"
+								style={{ transform: 'translateZ(0)' }}
 							>
-								<span>Get in Touch</span>
+								<span className="text-sm sm:text-base">Get in Touch</span>
 								<svg 
-									className="w-5 h-5 transform group-hover/btn:translate-x-1 transition-transform duration-300" 
+									className="w-4 h-4 sm:w-5 sm:h-5 transform group-hover/btn:translate-x-1 transition-transform duration-300 will-change-transform" 
 									fill="none" 
 									viewBox="0 0 24 24" 
 									stroke="currentColor"
