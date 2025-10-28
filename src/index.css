@@ -142,3 +142,33 @@
     transform: scale(1);
   }
 }
+
+/* Autofill styles for dark theme inputs */
+/* Chromium / Safari */
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  /* Keep text legible on dark backgrounds */
+  -webkit-text-fill-color: #e5e7eb; /* gray-200 */
+  caret-color: #e5e7eb;
+  /* Override the default bright/yellow autofill background */
+  -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.05) inset; /* match bg-white/5 */
+  box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.05) inset;
+  /* Prevent flash of default autofill color */
+  transition: background-color 9999s ease-in-out 0s, color 9999s ease-in-out 0s;
+}
+
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.05) inset;
+  box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.05) inset;
+}
+
+/* Firefox */
+input:-moz-autofill,
+textarea:-moz-autofill,
+select:-moz-autofill {
+  background-color: rgba(255, 255, 255, 0.05) !important; /* match bg-white/5 */
+  color: #e5e7eb !important; /* gray-200 */
+}

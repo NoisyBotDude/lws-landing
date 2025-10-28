@@ -82,7 +82,7 @@ export default function Navbar() {
 							</motion.div>
 						))}
 						<motion.a
-							href='https://calendly.com/admin-learnwithstack/30min'
+							href='https://calendly.com/admin-learnwithstack/ghl_custom_dashboard_build'
 							className="ml-4 px-6 py-2.5 rounded-lg bg-[#8B5CF6] text-white hover:bg-[#7C3AED] transition-colors"
 							initial={{ opacity: 0, scale: 0.9 }}
 							animate={{ opacity: 1, scale: 1 }}

@@ -6,6 +6,7 @@ import Benefits from '../components/Benefits';
 import Testimonials from '../components/Testimonials';
 import FAQ from '../components/FAQ';
 import About from '../components/About';
+import Team from '../components/Team';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -39,6 +40,7 @@ export default function Home() {
             <About />
             <Process />
             <Benefits />
+            <Team />
             <Testimonials />
             <FAQ />
         </>

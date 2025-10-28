@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import { ArrowRightIcon, SparklesIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 
 const logos = [
@@ -70,7 +70,8 @@ export default function Hero() {
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.5 }}
 					>
-						<span className="px-3 py-1 text-sm text-white bg-[#8B5CF6] rounded-full">
+						<span className="px-3 py-1 text-sm text-white bg-[#8B5CF6] rounded-full inline-flex items-center gap-2">
+							<SparklesIcon className="w-4 h-4" />
 							Build With Stack
 						</span>
 

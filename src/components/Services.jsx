@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import AnimatedCard from './AnimatedCard';
+import { Link } from 'react-router-dom';
 import {
 	DocumentTextIcon,
 	CheckIcon,
@@ -25,19 +26,19 @@ import {
 	CpuChipIcon,
 } from '@heroicons/react/24/outline';
 
-const ServiceSection = ({ tag, title, description, children, isReversed = false }) => (
-	<div className="grid lg:grid-cols-2 gap-12 items-center py-16">
+const ServiceSection = ({ tag, tagIcon: TagIcon, title, description, children, isReversed = false }) => (
+	<div className="grid lg:grid-cols-2 gap-2 md:gap-12 items-center py-10 md:py-16">
 		{isReversed ? (
 			<>
 				{children}
 				<div className="lg:pl-12 order-first lg:order-last">
-					<Content tag={tag} title={title} description={description} />
+					<Content tag={tag} tagIcon={TagIcon} title={title} description={description} />
 				</div>
 			</>
 		) : (
 			<>
 				<div className="lg:pr-12">
-					<Content tag={tag} title={title} description={description} />
+					<Content tag={tag} tagIcon={TagIcon} title={title} description={description} />
 				</div>
 				{children}
 			</>
@@ -45,7 +46,7 @@ const ServiceSection = ({ tag, title, description, children, isReversed = false 
 	</div>
 );
 
-const Content = ({ tag, title, description }) => (
+const Content = ({ tag, tagIcon: TagIcon, title, description }) => (
 	<motion.div
 		initial={{ opacity: 0, y: 20 }}
 		whileInView={{ opacity: 1, y: 0 }}
@@ -58,8 +59,9 @@ const Content = ({ tag, title, description }) => (
 			whileInView={{ opacity: 1 }}
 			viewport={{ once: true }}
 			transition={{ duration: 0.5 }}
-			className="inline-block px-4 py-1 bg-gray-900 rounded-full text-gray-300 text-sm mb-6"
+			className="inline-flex items-center gap-2 px-4 py-1 bg-gray-900 rounded-full text-gray-300 text-sm mb-6"
 		>
+			{TagIcon && <TagIcon className="w-4 h-4 text-[#8B5CF6]" />}
 			{tag}
 		</motion.span>
 
@@ -88,20 +90,23 @@ const Content = ({ tag, title, description }) => (
 export default function Services() {
 	return (
 		<section id="services" className="relative overflow-hidden">
-			{/* Background with slight gradient */}
-			<div className="absolute inset-0 bg-gradient-to-b from-black to-gray-900/20" />
+			{/* Background with gradient and soft blobs for depth (darker to match site) */}
+			<div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900/20 to-black" />
+			<div className="absolute left-1/4 -top-10 w-96 h-96 rounded-full bg-[#8B5CF6]/5 blur-3xl" />
+			<div className="absolute right-1/4 bottom-0 w-96 h-96 rounded-full bg-blue-600/5 blur-3xl" />
 
 			<div className="container relative z-10">
 				{/* Workflow Automation Section */}
-				<div className="mt-32">
+				<div className="mt-32 mb-12">
 					<div className="text-center mb-16">
 						<motion.span
 							initial={{ opacity: 0 }}
 							whileInView={{ opacity: 1 }}
 							viewport={{ once: true }}
 							transition={{ duration: 0.5 }}
-							className="inline-block px-4 py-1 bg-gray-900 rounded-full text-gray-300 text-sm mb-6"
+							className="inline-flex items-center gap-2 px-4 py-1 bg-gray-900 rounded-full text-gray-300 text-sm mb-6"
 						>
+							<WrenchScrewdriverIcon className="w-4 h-4 text-[#8B5CF6]" />
 							Our Toolkits
 						</motion.span>
 
@@ -126,24 +131,31 @@ export default function Services() {
 						</motion.p>
 					</div>
 
-					{/* Case Study - Replace with Toolkit Categories */}
+					{/* Toolkit Categories */}
 					<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
 						{[
 							{
 								title: "Automation",
+								icon: ArrowPathIcon,
+								accent: 'from-[#8B5CF6] to-purple-600',
 								items: ["Make.com", "Zapier", "Google Apps Script"]
 							},
 							{
 								title: "AI & ML",
-								// items: ["OpenAI", "Claude", "LangChain", "GPT Agents"]
+								icon: CpuChipIcon,
+								accent: 'from-indigo-500 to-blue-500',
 								items: ["OpenAI", "Claude", "LangChain"]
 							},
 							{
 								title: "CRM & Tools",
+								icon: DocumentTextIcon,
+								accent: 'from-emerald-500 to-green-500',
 								items: ["GoHighLevel", "HubSpot", "Monday.com"]
 							},
 							{
 								title: "Infrastructure",
+								icon: CloudArrowDownIcon,
+								accent: 'from-pink-500 to-rose-500',
 								items: ["Vercel", "Firebase", "DigitalOcean"]
 							}
 						].map((category, index) => (
@@ -153,17 +165,28 @@ export default function Services() {
 								whileInView={{ opacity: 1, y: 0 }}
 								viewport={{ once: true }}
 								transition={{ duration: 0.5, delay: index * 0.1 }}
-								className="p-6 bg-gray-900/50 rounded-3xl border border-gray-800 shadow-md shadow-purple-500"
+								whileHover={{ y: -6, scale: 1.02 }}
+								whileTap={{ scale: 0.99 }}
+								className="group relative p-6 rounded-3xl border border-gray-800 bg-gradient-to-br from-gray-900/95 to-gray-900/75 backdrop-blur-sm overflow-hidden hover:border-[#8B5CF6]/30 transition-all hover:shadow-xl hover:shadow-black/20"
 							>
-								<h3 className="text-xl font-semibold text-white mb-4">{category.title}</h3>
-								<ul className="space-y-2">
-									{category.items.map((item, i) => (
-										<li key={item} className="text-gray-400 flex items-center gap-2">
-											<div className="w-1.5 h-1.5 bg-[#8B5CF6] rounded-full" />
-											{item}
-										</li>
-									))}
-								</ul>
+								{/* Hover gradient wash */}
+								<div className={`absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-5 transition-opacity from-transparent via-[#8B5CF6] to-transparent`} />
+								<div className="relative z-10">
+									<div className="flex items-center gap-3 mb-5">
+										<div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${category.accent} flex items-center justify-center shadow-inner shadow-black/20 transform transition-transform duration-300 group-hover:scale-110`}>
+											<category.icon className="w-6 h-6 text-white" />
+										</div>
+										<h3 className="text-lg font-semibold text-white">{category.title}</h3>
+									</div>
+									<ul className="space-y-2">
+										{category.items.map((item) => (
+											<li key={item} className="text-gray-400 flex items-center gap-2">
+												<div className="w-1.5 h-1.5 bg-[#8B5CF6] rounded-full" />
+												{item}
+											</li>
+										))}
+									</ul>
+								</div>
 							</motion.div>
 						))}
 					</div>
@@ -178,6 +201,7 @@ export default function Services() {
 
 				<ServiceSection
 					tag="Custom Software Development"
+					tagIcon={CodeBracketIcon}
 					title="Build Products That Scale"
 					description="From complex CRMs to internal tools, customer portals, or admin dashboards we build products tailored to how you work. No cookie-cutter code. Just scalable software that grows with you."
 				>
@@ -267,6 +291,7 @@ export default function Services() {
 				{/* AI Assistant Section */}
 				<ServiceSection
 					tag="AI Integration & Automation"
+					tagIcon={CpuChipIcon}
 					title="Save Time. Close Faster."
 					description="We inject AI into your systems - think automated outreach, smart scheduling, lead scoring, data extraction, and more. Save time, close faster, and delight customers."
 					isReversed
@@ -363,14 +388,16 @@ export default function Services() {
 								</div>
 
 								{/* CTA */}
-								<motion.button
-									whileHover={{ scale: 1.02 }}
-									whileTap={{ scale: 0.98 }}
-									className="mt-6 w-full py-3 bg-gradient-to-r from-[#8B5CF6] to-[#6366F1] rounded-lg text-white font-medium flex items-center justify-center gap-2"
-								>
-									<BoltIcon className="w-5 h-5" />
-									Automate Your Workflow
-								</motion.button>
+								<Link to="/contact" className="block">
+									<motion.div
+										whileHover={{ scale: 1.02 }}
+										whileTap={{ scale: 0.98 }}
+										className="mt-6 w-full py-3 bg-gradient-to-r from-[#8B5CF6] to-[#6366F1] rounded-lg text-white font-semibold flex items-center justify-center gap-2 shadow-lg shadow-[#8B5CF6]/20 hover:shadow-[#8B5CF6]/30"
+									>
+										<BoltIcon className="w-5 h-5" />
+										Automate Your Workflow
+									</motion.div>
+								</Link>
 							</div>
 						</div>
 					</AnimatedCard>
@@ -379,6 +406,7 @@ export default function Services() {
 				{/* Sales & Marketing Section */}
 				<ServiceSection
 					tag="Workflow Optimization"
+					tagIcon={ArrowPathIcon}
 					title="Streamline Your Operations"
 					description="We rebuild your operations from the ground up using tools like Make.com, Zapier, Retool, or fully custom backends. No more duplicate work or missed handoffs."
 				>
@@ -487,14 +515,22 @@ export default function Services() {
 										</div>
 									</motion.div>
 
-									<motion.button
-										whileHover={{ scale: 1.02 }}
-										whileTap={{ scale: 0.98 }}
-										className="w-full py-3 bg-gradient-to-r from-gray-800 to-gray-700 rounded-lg text-white font-medium flex items-center justify-center gap-2 mt-4"
-									>
-										<ArrowPathIcon className="w-5 h-5" />
-										Optimize Your Workflow
-									</motion.button>
+									<Link to="/contact" className="block mt-4">
+										{/* <motion.div
+											whileHover={{ scale: 1.02 }}
+											whileTap={{ scale: 0.98 }}
+											className="w-full py-3 bg-gradient-to-r from-gray-800 to-gray-700 rounded-lg text-white font-semibold flex items-center justify-center gap-2"
+										> */}
+
+										<motion.div
+											whileHover={{ scale: 1.02 }}
+											whileTap={{ scale: 0.98 }}
+											className="mt-6 w-full py-3 bg-gradient-to-r from-[#8B5CF6] to-[#6366F1] rounded-lg text-white font-semibold flex items-center justify-center gap-2 shadow-lg shadow-[#8B5CF6]/20 hover:shadow-[#8B5CF6]/30"
+										>
+											<ArrowPathIcon className="w-5 h-5" />
+											Optimize Your Workflow
+										</motion.div>
+									</Link>
 								</div>
 							</div>
 						</div>
@@ -504,6 +540,7 @@ export default function Services() {
 				{/* Custom Projects Section */}
 				<ServiceSection
 					tag="Fractional Tech Leadership"
+					tagIcon={Cog6ToothIcon}
 					title="Your On-Demand CTO"
 					description="Need a CTO brain without the full-time cost? We'll help architect your product, hire the right engineers, and ship fast. One point of contact, weekly updates, no communication black hole."
 					isReversed
@@ -603,11 +640,25 @@ export default function Services() {
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true }}
 							transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-							className="px-4 py-2 bg-gray-900 rounded-xl shadow shadow-purple-500"
+							whileHover={{ y: -3 }}
+							className="px-4 py-2 bg-gray-900/70 rounded-xl border border-gray-800 hover:border-[#8B5CF6]/30 transition-all"
 						>
 							<h3 className="text-white font-medium">{feature}</h3>
 						</motion.div>
 					))}
+				</div>
+
+				{/* Bottom Page CTA */}
+				<div className="pb-28 text-center">
+					<Link to="/contact" className="inline-block">
+						<motion.div
+							whileHover={{ scale: 1.03 }}
+							whileTap={{ scale: 0.98 }}
+							className="px-8 py-4 bg-gradient-to-r from-[#8B5CF6] to-purple-600 text-white font-semibold rounded-xl shadow-xl shadow-[#8B5CF6]/20 hover:shadow-[#8B5CF6]/30"
+						>
+							Let's Build Your Next Thing
+						</motion.div>
+					</Link>
 				</div>
 			</div>
 		</section>

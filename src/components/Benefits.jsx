@@ -123,8 +123,9 @@ export default function Benefits() {
 						whileInView={{ opacity: 1 }}
 						viewport={{ once: true }}
 						transition={{ duration: 0.5 }}
-						className="inline-block px-4 py-1 bg-gray-900 rounded-full text-gray-300 text-sm mb-6"
+						className="inline-flex items-center gap-2 px-4 py-1 bg-gray-900 rounded-full text-gray-300 text-sm mb-6"
 					>
+						<ShieldCheckIcon className="w-4 h-4 text-[#8B5CF6]" />
 						Why Choose Us
 					</motion.span>
 
