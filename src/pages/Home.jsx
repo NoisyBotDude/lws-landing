@@ -2,7 +2,6 @@ import Hero from '../components/Hero';
 import Services from '../components/Services';
 import Process from '../components/Process';
 import Benefits from '../components/Benefits';
-// import TrustedBy from '../components/TrustedBy';
 import Testimonials from '../components/Testimonials';
 import FAQ from '../components/FAQ';
 import About from '../components/About';
@@ -35,7 +34,6 @@ export default function Home() {
     return (
         <>
             <Hero />
-            {/* <TrustedBy /> */}
             <Services />
             <About />
             <Process />

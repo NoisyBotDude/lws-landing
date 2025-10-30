@@ -1,5 +1,18 @@
 {
-  "projects": {
-    "default": "bws-landing-site"
-  }
+	"projects": {
+		"default": "bws-landing-site"
+	},
+	"targets": {
+		"bws-landing-site": {
+			"hosting": {
+				"sanity-studio": [
+					"bws-landing-site-studio"
+				],
+				"default": [
+					"bws-landing-site"
+				]
+			}
+		}
+	},
+	"etags": {}
 }

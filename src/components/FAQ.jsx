@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDownIcon, PlusIcon, MinusIcon } from '@heroicons/react/24/solid';
+import { PlusIcon, MinusIcon } from '@heroicons/react/24/solid';
 import { 
 	QuestionMarkCircleIcon,
 	SparklesIcon 

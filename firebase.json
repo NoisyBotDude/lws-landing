@@ -1,16 +1,28 @@
 {
-	"hosting": {
-		"public": "build",
-		"ignore": [
-			"firebase.json",
-			"**/.*",
-			"**/node_modules/**"
-		],
-		"rewrites": [
-			{
-				"source": "**",
-				"destination": "/index.html"
-			}
-		]
-	}
+	"hosting": [
+		{
+			"target": "default",
+			"public": "build",
+			"ignore": [
+				"firebase.json",
+				"**/.*",
+				"**/node_modules/**"
+			],
+			"rewrites": [
+				{
+					"source": "**",
+					"destination": "/index.html"
+				}
+			]
+		},
+		{
+			"target": "sanity-studio",
+			"public": "sanity-studio/dist",
+			"ignore": [
+				"firebase.json",
+				"**/.*",
+				"**/node_modules/**"
+			]
+		}
+	]
 }

@@ -11,7 +11,8 @@ export default function BlogList() {
     const [loadingMore, setLoadingMore] = useState(false);
     const [offset, setOffset] = useState(0);
     const [hasMore, setHasMore] = useState(false);
-    const [total, setTotal] = useState(null);
+    const [categories, setCategories] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState('All');
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -20,7 +21,21 @@ export default function BlogList() {
     const debounceRef = useRef(null)
     const PAGE_SIZE = 9
 
-    const fetchPage = useCallback(async ({ append = false, term = searchTerm, startFrom = offset } = {}) => {
+    // Fetch categories on mount
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const categoryQuery = `*[_type == "category"]{ _id, title }`
+                const fetchedCategories = await client.fetch(categoryQuery)
+                setCategories(fetchedCategories)
+            } catch (err) {
+                console.error('Error fetching categories:', err)
+            }
+        }
+        fetchCategories()
+    }, [])
+
+    const fetchPage = useCallback(async ({ append = false, term, startFrom, category } = {}) => {
         append ? setLoadingMore(true) : setLoading(true)
         try {
             const end = startFrom + PAGE_SIZE - 1
@@ -28,18 +43,26 @@ export default function BlogList() {
                 q: term && term.trim() !== '' ? `${term.trim()}*` : '',
                 offset: startFrom,
                 end,
+                categoryId: category !== 'All' ? category : null,
             }
 
+            // Build filter conditions
+            const searchFilter = `($q == '' || title match $q || excerpt match $q)`
+            const categoryFilter = category !== 'All' ? `&& references($categoryId)` : ''
+            const tagFilter = `|| (count(tags[references(^._id)]) > 0 && $q != '' && $q in tags[]->name)`
+
             const query = `{
-                "items": *[_type == "post" && ($q == '' || title match $q || excerpt match $q)]
+                "items": *[_type == "post" && (${searchFilter} ${tagFilter}) ${categoryFilter}]
                     | order(publishedAt desc) [$offset...$end]{
                         title,
                         "slug": slug.current,
                         mainImage{asset->{url}},
                         publishedAt,
-                        excerpt
+                        excerpt,
+                        "categories": categories[]->title,
+                        "tags": tags[]->name
                     },
-                "total": count(*[_type == "post" && ($q == '' || title match $q || excerpt match $q)])
+                "total": count(*[_type == "post" && (${searchFilter} ${tagFilter}) ${categoryFilter}])
             }`
 
             const { items, total } = await client.fetch(query, params)
@@ -52,30 +75,37 @@ export default function BlogList() {
             })
 
             setOffset(startFrom + items.length)
-            setTotal(total)
             setHasMore(startFrom + items.length < total)
         } catch (err) {
             console.error(err)
         } finally {
             append ? setLoadingMore(false) : setLoading(false)
         }
-    }, [offset, searchTerm])
-
-    useEffect(() => {
-        fetchPage({ append: false, startFrom: 0 })
     }, [])
 
+    // Initial fetch on mount
+    useEffect(() => {
+        fetchPage({ append: false, term: '', startFrom: 0, category: 'All' })
+    }, [fetchPage])
+
+    // Handle search term and category changes with debounce
     useEffect(() => {
         if (debounceRef.current) clearTimeout(debounceRef.current)
         debounceRef.current = setTimeout(() => {
             setOffset(0)
             setHasMore(true)
-            fetchPage({ append: false, term: searchTerm, startFrom: 0 })
+            fetchPage({ append: false, term: searchTerm, startFrom: 0, category: selectedCategory })
         }, 400)
         return () => {
             if (debounceRef.current) clearTimeout(debounceRef.current)
         }
-    }, [searchTerm, fetchPage])
+    }, [searchTerm, selectedCategory])
+
+    const handleCategoryChange = (categoryId) => {
+        setSelectedCategory(categoryId)
+        setOffset(0)
+        setHasMore(true)
+    }
 
     return (
         <section className="relative min-h-screen bg-black overflow-hidden">
@@ -115,17 +145,51 @@ export default function BlogList() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className="max-w-2xl mx-auto mb-16"
+                    className="max-w-2xl mx-auto mb-8"
                 >
                     <div className="relative">
                         <MagnifyingGlassIcon aria-hidden="true" className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none z-10" />
                         <input
                             type="text"
-                            placeholder="Search articles..."
+                            placeholder="Search articles by title, excerpt, or tags..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                             className="w-full pl-12 pr-4 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-[#8B5CF6] transition-all duration-300"
                         />
+                    </div>
+                </motion.div>
+
+                {/* Category Filter Pills */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                    className="max-w-4xl mx-auto mb-16"
+                >
+                    <div className="flex flex-wrap justify-center gap-3">
+                        <button
+                            onClick={() => handleCategoryChange('All')}
+                            className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                                selectedCategory === 'All'
+                                    ? 'bg-[#8B5CF6] text-white shadow-lg shadow-[#8B5CF6]/30'
+                                    : 'bg-white/5 text-gray-300 border border-white/10 hover:bg-white/10 hover:border-[#8B5CF6]/30'
+                            }`}
+                        >
+                            All
+                        </button>
+                        {categories.map((category) => (
+                            <button
+                                key={category._id}
+                                onClick={() => handleCategoryChange(category._id)}
+                                className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                                    selectedCategory === category._id
+                                        ? 'bg-[#8B5CF6] text-white shadow-lg shadow-[#8B5CF6]/30'
+                                        : 'bg-white/5 text-gray-300 border border-white/10 hover:bg-white/10 hover:border-[#8B5CF6]/30'
+                                }`}
+                            >
+                                {category.title}
+                            </button>
+                        ))}
                     </div>
                 </motion.div>
 
@@ -186,6 +250,20 @@ export default function BlogList() {
                                                 </p>
                                             )}
 
+                                            {/* Tags */}
+                                            {post.tags && post.tags.length > 0 && (
+                                                <div className="flex flex-wrap gap-2 mb-4">
+                                                    {post.tags.slice(0, 3).map((tag, idx) => (
+                                                        <span
+                                                            key={idx}
+                                                            className="px-2 py-1 text-xs rounded-full bg-[#8B5CF6]/20 text-[#8B5CF6] border border-[#8B5CF6]/30"
+                                                        >
+                                                            {tag}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            )}
+
                                             <div className="flex items-center justify-between">
                                                 <p className="text-gray-500 text-sm">
                                                     {new Date(post.publishedAt).toLocaleDateString(
@@ -223,7 +301,7 @@ export default function BlogList() {
                     <div className="flex justify-center py-10">
                         <button
                             type="button"
-                            onClick={() => fetchPage({ append: true, startFrom: offset })}
+                            onClick={() => fetchPage({ append: true, startFrom: offset, category: selectedCategory })}
                             disabled={loadingMore}
                             className="px-6 py-3 bg-[#8B5CF6] hover:bg-[#7C3AED] disabled:opacity-60 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
                         >
@@ -239,7 +317,14 @@ export default function BlogList() {
                     </div>
                 )}
                 {!loading && !loadingMore && !hasMore && posts.length > 0 && (
-                    <p className="text-center text-gray-500 py-8">You've reached the end.</p>
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="text-center py-8"
+                    >
+                        <p className="text-gray-500">You've reached the end.</p>
+                    </motion.div>
                 )}
             </div>
         </section>
