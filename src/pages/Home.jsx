@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import Hero from '../components/Hero';
 import Services from '../components/Services';
 import Process from '../components/Process';
@@ -17,22 +18,33 @@ export default function Home() {
     }, []);
 
     useEffect(() => {
-        if (location.pathname === "/about") {
-            const aboutUsSection = document.getElementById("about");
-            if (aboutUsSection) {
-                aboutUsSection.scrollIntoView({ behavior: "smooth" });
+        const sectionIdMap = {
+            "/about": "about",
+            "/services": "services",
+        };
+
+        const sectionId = sectionIdMap[location.pathname];
+        if (sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: "smooth" });
             }
-        }
-        if (location.pathname === "/services") {
-            const aboutUsSection = document.getElementById("services");
-            if (aboutUsSection) {
-                aboutUsSection.scrollIntoView({ behavior: "smooth" });
-            }
+        } else {
+            window.scrollTo({ top: 0, behavior: "smooth" });
         }
     }, [location]);
-    
+
     return (
         <>
+            <Helmet>
+                <title>Build With Stack | Automation & Growth Experts</title>
+                <meta
+                    name="description"
+                    content="We help businesses automate smarter and grow faster with custom software and integrations."
+                />
+                <link rel="canonical" href="https://buildwithstack.com/" />
+            </Helmet>
+
             <Hero />
             <Services />
             <About />
