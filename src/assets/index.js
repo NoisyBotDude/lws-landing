@@ -4,3 +4,7 @@ export { default as FIREBASE_ICON } from './firebase.png';
 export { default as NEXT_ICON } from './next.png';
 export { default as HIGHLEVEL_ICON } from './highlevel.jpg';
 export { default as ORACLE_ICON } from './oracle.png';
+
+export { default as TEAM_MARKETING } from './team_marketing.jpeg';
+export { default as TEAM_CORE } from './team_core.jpeg';
+export { default as TEAM_DEVELOPER } from './team_developer.jpeg';
