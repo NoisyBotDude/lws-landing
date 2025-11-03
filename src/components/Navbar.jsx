@@ -115,7 +115,7 @@ export default function Navbar() {
 					</div>
 
 					{/* Mobile menu button */}
-					<div className='flex flex-row justify-center items-center gap-4'>
+					<div className='flex flex-row justify-center items-center gap-4 md:hidden'>
 						{!isOpen && (
 							<motion.a
 								href='https://calendly.com/admin-learnwithstack/ghl_custom_dashboard_build'
