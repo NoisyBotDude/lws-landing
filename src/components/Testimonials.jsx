@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { StarIcon } from '@heroicons/react/24/solid';
 import { useState, useEffect } from 'react';
+import { BADIE_TESTIMONY, JEREMY_TESTIMONY, MG_TESTIMONY } from '../assets';
 
 const testimonials = [
 	{
@@ -8,6 +9,7 @@ const testimonials = [
 		content: "Working with this team on our Shopify website for Woodin.in was an exceptionally positive experience from start to finish. Their professionalism was evident in every interaction; they were incredibly responsive, understood our vision perfectly, and truly felt like an extension of our own team. The communication was clear and consistent, which made the entire process smooth and stress-free. They delivered a high-quality, fully functional e-commerce site exactly when they said they would, allowing us to launch on schedule. I would highly prefer to work with them again on future projects.",
 		author: {
 			name: "Badie Almualem",
+			image: BADIE_TESTIMONY,
 			role: "Owner, Woodin.in ",
 		}
 	},
@@ -16,6 +18,7 @@ const testimonials = [
 		content: "Build With Stack played a crucial role in helping us scale ConvoGPT from a powerful idea to a functional AI-driven platform. Their deep expertise in automation, AI integrations, and frontend/backend development allowed us to build fast, iterate faster, and deliver a seamless experience to our users. Whether it was designing complex workflows, setting up AI agents, or ensuring rock-solid infrastructure, the team was proactive, responsive, and always solutions-focused. They're not just a dev agency, they're an extension of our core team.",
 		author: {
 			name: "Jeremy David",
+			image: JEREMY_TESTIMONY,
 			role: "CEO, ConvoGPT AI ",
 		}
 	},
@@ -24,6 +27,7 @@ const testimonials = [
 		content: "Working with Build With Stack has been a total game-changer for Modvertise. We needed a custom-built, scalable solution that could support both our internal ops and client-facing systems and they delivered above and beyond. Their team not only understood our complex workflows but also helped simplify and automate key areas like scheduling, CRM, payment tracking, and reporting. Communication was smooth, timelines were respected, and the product exceeded expectations. If you're looking for a team that treats your project like their own startup, Build With Stack is who you want.",
 		author: {
 			name: "MG",
+			image: MG_TESTIMONY,
 			role: "CEO, modvertise.com ",
 		}
 	},

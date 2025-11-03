@@ -28,7 +28,7 @@ export default function Navbar() {
 			document.body.style.position = '';
 			document.body.style.width = '';
 		}
-		
+
 		return () => {
 			document.body.style.overflow = '';
 			document.body.style.position = '';
@@ -91,8 +91,8 @@ export default function Navbar() {
 										to={item.href}
 										replace={item.name === "About" ? true : false}
 										className={`transition-colors ${location.pathname === item.href
-												? 'text-white'
-												: 'text-gray-300 hover:text-white'
+											? 'text-white'
+											: 'text-gray-300 hover:text-white'
 											}`}
 									>
 										{item.name}
@@ -110,30 +110,45 @@ export default function Navbar() {
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
 						>
-							Book a call
+							Book a Call
 						</motion.a>
 					</div>
 
 					{/* Mobile menu button */}
-					<motion.div
-						className="md:hidden"
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						transition={{ duration: 0.5 }}
-					>
-						<button
-							type="button"
-							className="text-gray-300 hover:text-white"
-							onClick={() => setIsOpen(!isOpen)}
+					<div className='flex flex-row justify-center items-center gap-4'>
+						{!isOpen && (
+							<motion.a
+								href='https://calendly.com/admin-learnwithstack/ghl_custom_dashboard_build'
+								target='blank'
+								className="md:hidden w-full px-3 py-2 rounded-lg bg-gradient-to-r from-[#8B5CF6] to-purple-600 text-sm text-white text-center font-normal hover:from-[#7C3AED] hover:to-purple-700 transition-all active:scale-95"
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								transition={{ duration: 0.3, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
+								onClick={() => setIsOpen(false)}
+							>
+								Book a Call
+							</motion.a>
+						)}
+						<motion.div
+							className="md:hidden"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ duration: 0.5 }}
 						>
-							<span className="sr-only">Open main menu</span>
-							{isOpen ? (
-								<XMarkIcon className="h-6 w-6" />
-							) : (
-								<Bars3Icon className="h-6 w-6" />
-							)}
-						</button>
-					</motion.div>
+							<button
+								type="button"
+								className="text-gray-300 hover:text-white"
+								onClick={() => setIsOpen(!isOpen)}
+							>
+								<span className="sr-only">Open main menu</span>
+								{isOpen ? (
+									<XMarkIcon className="h-6 w-6" />
+								) : (
+									<Bars3Icon className="h-6 w-6" />
+								)}
+							</button>
+						</motion.div>
+					</div>
 				</div>
 
 				{/* Mobile Navigation - Full Screen */}
@@ -169,8 +184,8 @@ export default function Navbar() {
 													to={item.href}
 													replace={item.name === "About" ? true : false}
 													className={`block px-4 py-4 text-lg font-medium rounded-xl transition-colors ${location.pathname === item.href
-															? 'text-white bg-gray-800/50'
-															: 'text-gray-300 hover:text-white hover:bg-gray-800/50'
+														? 'text-white bg-gray-800/50'
+														: 'text-gray-300 hover:text-white hover:bg-gray-800/50'
 														}`}
 													onClick={() => setIsOpen(false)}
 												>
@@ -189,7 +204,7 @@ export default function Navbar() {
 									transition={{ duration: 0.3, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
 									onClick={() => setIsOpen(false)}
 								>
-									Book a call
+									Book a Call
 								</motion.a>
 							</div>
 						</motion.div>
