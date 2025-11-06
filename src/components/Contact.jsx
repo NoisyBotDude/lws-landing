@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { EnvelopeIcon, PhoneIcon, ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/24/outline';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { CALENDER_URL } from '../config/appCondfig';
 
 export default function Contact() {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -708,7 +709,7 @@ export default function Contact() {
 						<div className="flex flex-col sm:flex-row justify-center items-center gap-6">
 							<div className="flex items-center">
 								<PhoneIcon className="h-5 w-5 text-[#8B5CF6] mr-2" />
-								<a target="blank" href="https://calendly.com/admin-learnwithstack/ghl_custom_dashboard_build" className="text-gray-300 hover:text-[#8B5CF6]">
+								<a target="blank" href={CALENDER_URL} className="text-gray-300 hover:text-[#8B5CF6]">
 									Book an appointment
 								</a>
 							</div>

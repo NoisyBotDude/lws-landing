@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../logos/2@4x.png'
+import { CALENDER_URL } from '../config/appCondfig';
 
 export default function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -101,7 +102,7 @@ export default function Navbar() {
 							</motion.div>
 						))}
 						<motion.a
-							href='https://calendly.com/admin-learnwithstack/ghl_custom_dashboard_build'
+							href={CALENDER_URL}
 							target='blank'
 							className="ml-4 px-6 py-2.5 rounded-lg bg-[#8B5CF6] text-white hover:bg-[#7C3AED] transition-colors"
 							initial={{ opacity: 0, scale: 0.9 }}
@@ -118,7 +119,7 @@ export default function Navbar() {
 					<div className='flex flex-row justify-center items-center gap-4 md:hidden'>
 						{!isOpen && (
 							<motion.a
-								href='https://calendly.com/admin-learnwithstack/ghl_custom_dashboard_build'
+								href={CALENDER_URL}
 								target='blank'
 								className="md:hidden w-full px-3 py-2 rounded-lg bg-gradient-to-r from-[#8B5CF6] to-purple-600 text-sm text-white text-center font-normal hover:from-[#7C3AED] hover:to-purple-700 transition-all active:scale-95"
 								initial={{ opacity: 0 }}
@@ -196,7 +197,7 @@ export default function Navbar() {
 									))}
 								</nav>
 								<motion.a
-									href='https://calendly.com/admin-learnwithstack/ghl_custom_dashboard_build'
+									href={CALENDER_URL}
 									target='blank'
 									className="w-full px-6 py-4 rounded-xl bg-gradient-to-r from-[#8B5CF6] to-purple-600 text-white text-center font-semibold hover:from-[#7C3AED] hover:to-purple-700 transition-all active:scale-95"
 									initial={{ opacity: 0, y: 20 }}
