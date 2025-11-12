@@ -9,6 +9,7 @@ import ContactPage from './pages/ContactPage';
 import MetaPixel from './components/MetaPixel';
 import BlogList from './pages/BlogList';
 import BlogPost from './pages/BlogPost';
+import CostEstimate from './pages/CostEstimate';
 
 function App() {
 	return (
@@ -22,6 +23,7 @@ function App() {
 						<Route path="/" element={<Home />} />
 						<Route path="/about" element={<Home />} />
 						<Route path="/services" element={<Home />} />
+						<Route path="/estimate" element={<CostEstimate />} />
 						<Route path="/contact" element={<ContactPage />} />
 						<Route path="/blogs/all" element={<BlogList />} />
 						<Route path="/blogs/blog/:slug" element={<BlogPost />} />

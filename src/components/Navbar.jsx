@@ -40,6 +40,7 @@ export default function Navbar() {
 	const navigation = [
 		{ name: 'Home', href: '/' },
 		{ name: 'About', href: '/about' },
+		{ name: 'Estimate', href: '/estimate' },
 		{ name: 'Blogs', href: '/blogs/all' },
 		{ name: 'Contact', href: '/contact' },
 	];
