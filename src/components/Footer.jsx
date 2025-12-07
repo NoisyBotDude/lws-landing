@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion';
 import logo from '../logos/2@4x.png';
-import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+import { SiInstagram, SiFacebook } from "react-icons/si";
 
 const navigation = {
 	socials: [
-		{ name: 'Instagram', href: 'https://www.instagram.com/buildwithstack?igsh=MTliYXUxZXo5eDcxYQ%3D%3D&utm_source=qr' },
-		{ name: 'Facebook', href: 'https://www.facebook.com/share/19RGTRJNde/?mibextid=wwXIfr' },
+		{ name: 'Instagram', href: 'https://www.instagram.com/buildwithstack?igsh=MTliYXUxZXo5eDcxYQ%3D%3D&utm_source=qr', icon: SiInstagram },
+		{ name: 'Facebook', href: 'https://www.facebook.com/share/16dXyNxw7J/?mibextid=wwXIfr', icon: SiFacebook },
 	],
 };
 
@@ -52,7 +52,7 @@ export default function Footer() {
 									className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
 								>
 									<span className="hidden md:inline">{social.name}</span>
-									<ArrowTopRightOnSquareIcon className="w-5 h-5" />
+									<social.icon className="w-5 h-5" />
 								</motion.a>
 							))}
 						</div>

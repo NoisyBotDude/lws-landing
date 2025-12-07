@@ -193,7 +193,7 @@ export default function CostEstimate() {
                 { value: 'ghl_app', label: 'GoHighLevel App' },
             ]
         },
-    { id: 'features', title: 'Which features are must-have?', type: 'multi', options: Object.keys(FEATURES).map(k => ({ value: k, label: toTitle(k), icon: ICONS[k] || ICONS.default })) },
+        { id: 'features', title: 'Which features are must-have?', type: 'multi', options: Object.keys(FEATURES).map(k => ({ value: k, label: toTitle(k), icon: ICONS[k] || ICONS.default })) },
         {
             id: 'stage', title: 'Current stage of the product?', type: 'single', options: [
                 { value: 'idea_only', label: 'Idea only' },
@@ -246,7 +246,7 @@ export default function CostEstimate() {
                 { value: 'complex_multi', label: 'Complex / multi-source' },
             ]
         },
-    { id: 'platforms', title: 'Which platforms?', type: 'multi', options: Object.keys(PLATFORMS).map(k => ({ value: k, label: toTitle(k), icon: ICONS[k] || ICONS.default })) },
+        { id: 'platforms', title: 'Which platforms?', type: 'multi', options: Object.keys(PLATFORMS).map(k => ({ value: k, label: toTitle(k), icon: ICONS[k] || ICONS.default })) },
         { id: 'review', title: 'Review & submit', type: 'review' }
     ];
 

@@ -100,7 +100,7 @@ export default function BlogList() {
         return () => {
             if (debounceRef.current) clearTimeout(debounceRef.current)
         }
-    }, [searchTerm, selectedCategory])
+    }, [searchTerm, selectedCategory, fetchPage])
 
     const handleCategoryChange = (categoryId) => {
         setSelectedCategory(categoryId)
