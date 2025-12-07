@@ -1,1 +1,1 @@
-export const CALENDER_URL = 'https://cal.buildwithstack.com/widget/bookings/intro-call-with-build-with-stack';
+export const CALENDER_URL = "https://calendly.com/admin-learnwithstack/ghl-devs";
