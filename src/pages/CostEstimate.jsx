@@ -85,89 +85,8 @@ function toTitle(str) {
     return String(str).replaceAll('_', ' ').split(' ').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
 }
 
-function computeEstimateX(payload, { rate = 45, hpp = 6 } = {}) {
-    let base = 0;
-    base += PROJECT_TYPE[payload.project_type] || 0;
-    base += (payload.features || []).reduce((s, f) => s + (FEATURES[f] || 0), 0);
-    base += STAGE[payload.stage] || 0;
-    base += INTEGRATIONS[payload.integrations_count] || 0;
-    base += USER_VOLUME[payload.user_volume] || 0;
-    base += COMPLIANCE[payload.compliance] || 0;
-    base += TIMELINE[payload.timeline] || 0;
-    base += DESIGN[payload.design_scope] || 0;
-    base += MIGRATION[payload.migration] || 0;
-    base += (payload.platforms || []).reduce((s, p) => s + (PLATFORMS[p] || 0), 0);
-
-    const has_ai = (payload.features || []).includes('ai');
-    const has_voice = (payload.features || []).includes('realtime_voice');
-    const is_multitenant = (payload.features || []).includes('multi_tenant');
-    const is_ghl = (payload.platforms || []).includes('ghl_embedded');
-    const scale_users = ['1k_10k', 'gt_10k'].includes(payload.user_volume);
-    const needs_compliance = payload.compliance !== 'basic';
-
-    let score_mult = 1.0;
-    if (has_ai) score_mult *= 1.25;
-    if (has_voice) score_mult *= 1.20;
-    if (is_multitenant) score_mult *= 1.15;
-    if (payload.timeline === 'asap') score_mult *= 1.30;
-    else if (payload.timeline === '3_6_mo') score_mult *= 1.10;
-    if (scale_users) score_mult *= 1.15;
-    if (needs_compliance) score_mult *= 1.20;
-    if (is_ghl) score_mult *= 1.15;
-
-    const complexity = base * score_mult;
-    const dev_hrs = complexity * hpp;
-    const total_hrs = dev_hrs * 1.35;
-    const sprints = Math.ceil(total_hrs / 260);
-    const weeks = sprints * 2;
-
-    let cost_low = Math.ceil((total_hrs * rate * 0.9) / 500) * 500;
-    let cost_high = Math.ceil((total_hrs * rate * 1.1) / 500) * 500;
-    cost_low = Math.max(cost_low, 8000);
-
-    let tier, team;
-    if (complexity <= 70) {
-        tier = 'A';
-        team = '1 FE, 1 BE, 0.3 PM';
-    } else if (complexity <= 140) {
-        tier = 'B';
-        team = '1 FE, 2 BE, 1 PM';
-    } else if (complexity <= 220) {
-        tier = 'C';
-        team = '1 FE, 3 BE, 1 PM, 0.5 QA';
-    } else {
-        tier = 'D';
-        team = '1-2 FE, 3-4 BE, 1 PM, 1 QA, Solution Architect (pt)';
-    }
-
-    let stack = ['React', 'Node (Nest.js)', 'Postgres', 'Redis', 'AWS (Lambda + S3)'];
-    if (has_ai) stack = stack.concat(['Python (FastAPI) for AI microservices', 'LLM (OpenAI/Anthropic)']);
-    if (has_voice) stack = stack.concat(['WebRTC/Retell', 'WebSockets']);
-    if (is_ghl) stack = stack.concat(['GHL OAuth + API']);
-
-    const p1 = Math.round(total_hrs * 0.45);
-    const p2 = Math.round(total_hrs * 0.35);
-    const p3 = Math.round(total_hrs * 0.20);
-
-    return {
-        base_score: base,
-        complexity: Math.round(complexity * 10) / 10,
-        tier,
-        team,
-        dev_hours: Math.round(dev_hrs),
-        total_hours: Math.round(total_hrs),
-        sprints,
-        weeks,
-        cost_low,
-        cost_high,
-        stack,
-        phases: { phase_1_core: p1, phase_2_rules_integrations: p2, phase_3_billing_hardening: p3 },
-        notes: { rush: payload.timeline === 'asap' && weeks > 8 },
-    };
-}
-
-function computeEstimate(payload, { rate = 65 } = {}) {
-    // 1) Base points (keep your existing weights)
+function computeEstimate(payload) {
+    // 1) Base points from selections
     let base = 0;
     base += PROJECT_TYPE[payload.project_type] || 0;
     base += (payload.features || []).reduce((s, f) => s + (FEATURES[f] || 0), 0);
@@ -187,65 +106,90 @@ function computeEstimate(payload, { rate = 65 } = {}) {
     const scale_users = ['1k_10k', 'gt_10k'].includes(payload.user_volume);
     const needs_compliance = payload.compliance !== 'basic';
 
-    // 3) Convert "points" -> hours
-    // Your previous hpp=6 made numbers explode.
-    // This calibration makes the score behave like "feature complexity units"
-    // rather than "weeks".
-    const HPP = 2.6;
+    // 3) Fixed pricing tiers based on base complexity score
+    // Very simple (base ~10-20): $800-$1,200
+    // Simple (base ~20-30): $1,000-$1,500
+    // Medium (base ~30-50): $2,000-$5,000
+    // Complex (base ~50-80): $5,000-$12,000
+    // Very complex (base 80+): $12,000-$30,000+
+    let basePrice;
+    if (base <= 18) {
+        basePrice = 900;
+    } else if (base <= 28) {
+        basePrice = 1200; // Centers around $1,000-$1,500 range
+    } else if (base <= 50) {
+        basePrice = 3000;
+    } else if (base <= 80) {
+        basePrice = 7500;
+    } else {
+        basePrice = 18000;
+    }
 
-    // 4) Add targeted hours for special complexity (instead of multiplying everything)
-    // This matches real estimation: AI/voice/multi-tenant doesn't increase ALL work equally.
-    let addOnHours = 0;
-    if (has_ai) addOnHours += 120;
-    if (has_voice) addOnHours += 160;
-    if (is_multitenant) addOnHours += 110;
-    if (needs_compliance) addOnHours += 60;
-    if (is_ghl) addOnHours += 40;
-    if (scale_users) addOnHours += 70;
+    // 4) Add fixed amounts for complex features
+    let addOnPrice = 0;
+    if (has_ai) addOnPrice += 2500;
+    if (has_voice) addOnPrice += 3000;
+    if (is_multitenant) addOnPrice += 2000;
+    if (needs_compliance) addOnPrice += 1500;
+    if (is_ghl) addOnPrice += 800;
+    if (scale_users) addOnPrice += 1200;
 
-    // 5) Timeline affects cost mostly (rush fee), not total scope hours
-    // (still adds some overhead for parallelization + context switching)
+    // 5) Timeline rush premium
     let rushMultiplier = 1.0;
     if (payload.timeline === 'asap') rushMultiplier = 1.25;
     else if (payload.timeline === '3_6_mo') rushMultiplier = 1.10;
 
-    // 6) Base hours
-    const devHours = base * HPP + addOnHours;
+    // 6) Calculate final cost
+    const totalBasePrice = (basePrice + addOnPrice) * rushMultiplier;
 
-    // 7) Overhead: QA, PM, deployment, docs, iteration
-    // Old value was 1.35 (too high for freelancer estimator).
-    const totalHours = Math.round(devHours * 1.22);
+    // 7) Cost range with variance (tighter for simple projects, wider for complex)
+    let variance = 0.20; // ±20% default
+    if (base <= 28) variance = 0.20; // ±20% for simple projects
+    else if (base > 80) variance = 0.25; // ±25% for very complex projects
 
-    // 8) Timeline weeks: assume small team (freelance/mini-agency)
-    // This makes weeks realistic.
-    let hrsPerWeek = 35; // default: solo-ish
-    if (totalHours > 650) hrsPerWeek = 60; // small team
-    if (totalHours > 1200) hrsPerWeek = 85; // 3-4 person team
+    // Use smaller rounding increments for smaller projects
+    const roundTo = totalBasePrice < 2000 ? 100 : 250;
+    
+    let cost_low = Math.ceil((totalBasePrice * (1 - variance)) / roundTo) * roundTo;
+    let cost_high = Math.ceil((totalBasePrice * (1 + variance)) / roundTo) * roundTo;
 
-    const weeks = Math.max(3, Math.ceil(totalHours / hrsPerWeek));
-    const sprints = Math.max(2, Math.ceil(weeks / 2));
+    // Ensure minimum floor and reasonable spread
+    cost_low = Math.max(cost_low, 800);
+    cost_high = Math.max(cost_high, cost_low + 400);
 
-    // 9) Cost range
-    // Use rushMultiplier as a pricing factor (not a scope factor).
-    // Use a wider range than ±10% because estimation uncertainty is real.
-    const baseCost = totalHours * rate * rushMultiplier;
+    // 8) Estimate timeline (weeks/sprints) based on complexity
+    let weeks, sprints;
+    const totalComplexity = base + (has_ai ? 15 : 0) + (has_voice ? 20 : 0) + (is_multitenant ? 12 : 0);
+    
+    if (totalComplexity <= 25) {
+        weeks = 3;
+        sprints = 2;
+    } else if (totalComplexity <= 50) {
+        weeks = 5;
+        sprints = 3;
+    } else if (totalComplexity <= 80) {
+        weeks = 8;
+        sprints = 4;
+    } else {
+        weeks = 12;
+        sprints = 6;
+    }
 
-    let cost_low = Math.ceil((baseCost * 0.85) / 500) * 500;
-    let cost_high = Math.ceil((baseCost * 1.20) / 500) * 500;
+    // Adjust for rush timeline
+    if (payload.timeline === 'asap' && weeks > 4) {
+        weeks = Math.max(4, Math.ceil(weeks * 0.7));
+        sprints = Math.ceil(weeks / 2);
+    }
 
-    // Keep your minimum floor
-    cost_low = Math.max(cost_low, 8000);
-    cost_high = Math.max(cost_high, cost_low + 1500);
-
-    // 10) Tiering (based on totalHours instead of "complexity score")
+    // 9) Tiering based on total complexity
     let tier, team;
-    if (totalHours <= 280) {
+    if (totalComplexity <= 30) {
         tier = 'A';
         team = '1 Full-stack, 0.2 PM';
-    } else if (totalHours <= 650) {
+    } else if (totalComplexity <= 60) {
         tier = 'B';
         team = '1 FE, 1 BE, 0.4 PM';
-    } else if (totalHours <= 1200) {
+    } else if (totalComplexity <= 100) {
         tier = 'C';
         team = '1 FE, 2 BE, 1 PM, 0.5 QA';
     } else {
@@ -253,14 +197,14 @@ function computeEstimate(payload, { rate = 65 } = {}) {
         team = '1-2 FE, 3 BE, 1 PM, 1 QA, Solution Architect (pt)';
     }
 
-    // 11) Stack suggestions (keep your original idea)
+    // 10) Stack suggestions
     let stack = ['React', 'Node (Nest.js)', 'Postgres', 'Redis', 'AWS (S3 + Cloud)'];
     if (has_ai) stack = stack.concat(['Python (FastAPI) AI microservice', 'LLM (OpenAI/Anthropic)']);
     if (has_voice) stack = stack.concat(['WebRTC/Retell', 'WebSockets']);
     if (is_ghl) stack = stack.concat(['GHL OAuth + API']);
 
-    // 12) Phases (more realistic distribution)
-    // If AI/voice exists, push more effort into phase 2.
+    // 11) Phases — estimate hours for display (approximate)
+    const estimatedHours = Math.round(totalComplexity * 2.5);
     let p1 = 0.45, p2 = 0.35, p3 = 0.20;
     if (has_ai || has_voice) {
         p1 = 0.40;
@@ -268,20 +212,20 @@ function computeEstimate(payload, { rate = 65 } = {}) {
         p3 = 0.20;
     }
 
-    const phase_1_core = Math.round(totalHours * p1);
-    const phase_2_rules_integrations = Math.round(totalHours * p2);
-    const phase_3_billing_hardening = Math.round(totalHours * p3);
+    const phase_1_core = Math.round(estimatedHours * p1);
+    const phase_2_rules_integrations = Math.round(estimatedHours * p2);
+    const phase_3_billing_hardening = Math.round(estimatedHours * p3);
 
-    // 13) Notes
-    const rushFlag = payload.timeline === 'asap' && weeks > 10;
+    // 12) Notes
+    const rushFlag = payload.timeline === 'asap' && weeks > 8;
 
     return {
         base_score: base,
-        complexity: Math.round((base * 1.0) * 10) / 10, // keep field for UI compatibility
+        complexity: Math.round(base * 10) / 10,
         tier,
         team,
-        dev_hours: Math.round(devHours),
-        total_hours: totalHours,
+        dev_hours: Math.round(estimatedHours * 0.85),
+        total_hours: estimatedHours,
         sprints,
         weeks,
         cost_low,
