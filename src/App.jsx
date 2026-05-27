@@ -10,6 +10,8 @@ import MetaPixel from './components/MetaPixel';
 import BlogList from './pages/BlogList';
 import BlogPost from './pages/BlogPost';
 import CostEstimate from './pages/CostEstimate';
+import TermsAndConditions from './pages/TermsAndConditions';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
 	return (
@@ -25,6 +27,8 @@ function App() {
 						<Route path="/services" element={<Home />} />
 						<Route path="/estimate" element={<CostEstimate />} />
 						<Route path="/contact" element={<ContactPage />} />
+						<Route path="/terms" element={<TermsAndConditions />} />
+						<Route path="/privacy" element={<PrivacyPolicy />} />
 						<Route path="/blogs/all" element={<BlogList />} />
 						<Route path="/blogs/blog/:slug" element={<BlogPost />} />
 					</Routes>

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import logo from '../logos/2@4x.png';
 import { SiInstagram, SiFacebook } from "react-icons/si";
 
@@ -69,6 +70,23 @@ export default function Footer() {
 				>
 					<p className="text-gray-500 text-sm">
 						© {new Date().getFullYear()} Build With Stack. All rights reserved.
+					</p>
+					<p className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm">
+						<Link
+							to="/terms"
+							className="text-gray-400 hover:text-[#8B5CF6] transition-colors"
+						>
+							Terms & Conditions
+						</Link>
+						<span className="text-gray-700" aria-hidden="true">
+							|
+						</span>
+						<Link
+							to="/privacy"
+							className="text-gray-400 hover:text-[#8B5CF6] transition-colors"
+						>
+							Privacy Policy
+						</Link>
 					</p>
 				</motion.div>
 			</div>
