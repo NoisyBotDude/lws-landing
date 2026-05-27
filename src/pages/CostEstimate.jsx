@@ -55,12 +55,6 @@ const COMPLIANCE = {
     industry: 10,
 };
 
-const TIMELINE = {
-    '6_plus_mo': 0,
-    '3_6_mo': 4,
-    asap: 10,
-};
-
 const DESIGN = {
     basic_ui_kit: 2,
     design_system: 6,
@@ -278,7 +272,7 @@ export default function CostEstimate() {
 
     const [payload, setPayload] = useState(initial);
     const [currentStep, setCurrentStep] = useState(0);
-    const [result, setResult] = useState(null);
+    const [_setResult] = useState(null);
 
     const steps = [
         {
@@ -346,9 +340,6 @@ export default function CostEstimate() {
         { id: 'review', title: 'Review & submit', type: 'review' }
     ];
 
-    const featuresList = Object.keys(FEATURES);
-    const platformsList = Object.keys(PLATFORMS);
-
     const [pendingSelection, setPendingSelection] = useState(null);
 
     const toggleMulti = (key, field) => {
@@ -406,7 +397,7 @@ export default function CostEstimate() {
     const reset = () => {
         setPayload(initial);
         setCurrentStep(0);
-        setResult(null);
+        _setResult(null);
     };
 
     useEffect(() => { window.scrollTo(0, 0); }, []);
